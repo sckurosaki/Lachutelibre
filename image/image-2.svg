@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" width="300" height="500" role="img" aria-label="2. La vitesse augmente">
+<title>2. La vitesse augmente</title>
+<defs>
+  <linearGradient id="ciel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#a5d8ff"></stop><stop offset="1" stop-color="#e7f5ff"></stop>
+  </linearGradient>
+  <marker id="pR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 Z" fill="#c92a2a"></path></marker>
+  <marker id="pB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 Z" fill="#1971c2"></path></marker>
+</defs>
+<rect width="300" height="500" fill="url(#ciel)"></rect>
+<g fill="#ffffff" opacity="0.8">
+  <ellipse cx="60" cy="70" rx="30" ry="10"></ellipse><ellipse cx="78" cy="62" rx="18" ry="10"></ellipse>
+  <ellipse cx="245" cy="150" rx="28" ry="9"></ellipse><ellipse cx="230" cy="143" rx="15" ry="9"></ellipse>
+  <ellipse cx="40" cy="390" rx="26" ry="8"></ellipse>
+</g>
+<g transform="translate(150,250)" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="-26,-6 -40,-26 -54,-32" fill="none" stroke="#e8590c" stroke-width="7"></polyline>
+  <polyline points="8,-2 32,-16 52,-30" fill="none" stroke="#1864ab" stroke-width="8"></polyline>
+  <rect x="-38" y="-10" width="50" height="18" rx="9" fill="#e8590c"></rect>
+  <rect x="-30" y="-19" width="32" height="11" rx="3" fill="#343a40"></rect>
+  <circle cx="-49" cy="-1" r="11" fill="#f1c27d"></circle>
+  <path d="M-60,-2 A11,11 0 0 1 -38,-2 Z" fill="#212529"></path>
+  <circle cx="0" cy="0" r="3" fill="#212529"></circle>
+</g><line x1="150" y1="264" x2="150" y2="364" stroke="#c92a2a" stroke-width="5" marker-end="url(#pR)"></line><text x="162" y="314.0" font-family="Arial, Helvetica, sans-serif" fill="#c92a2a"><tspan font-size="17" font-weight="bold">F</tspan><tspan font-size="12" font-weight="bold" dy="4">g</tspan><tspan x="162" dy="15" font-size="11.5">force gravitationnelle</tspan></text><line x1="150" y1="230" x2="150" y2="175" stroke="#1971c2" stroke-width="5" marker-end="url(#pB)"></line><text x="162" y="202.5" font-family="Arial, Helvetica, sans-serif" fill="#1971c2"><tspan font-size="17" font-weight="bold">F</tspan><tspan font-size="12" font-weight="bold" dy="4">f</tspan><tspan x="162" dy="15" font-size="11.5">frottement de l'air</tspan></text><circle cx="26" cy="26" r="16" fill="#343a40"></circle><text x="26" y="32" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" fill="#fff">2</text><rect x="0" y="420" width="300" height="80" fill="#ffffff"></rect>
+<line x1="0" y1="420" x2="300" y2="420" stroke="#ced4da"></line>
+<text x="150.0" y="443" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#212529">2. La vitesse augmente</text>
+<text x="150.0" y="465" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#212529">F<tspan font-size="10" dy="3">f</tspan><tspan dy="-3"> augmente, mais F</tspan><tspan font-size="10" dy="3">g</tspan><tspan dy="-3"> &gt; F</tspan><tspan font-size="10" dy="3">f</tspan></text>
+<text x="150.0" y="486" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#495057">Il accélère encore, mais moins.</text>
+</svg>
