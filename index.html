@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La chute libre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{--bg:#eef2f4;--surface:#fff;--fg:#1f2a30;--muted:#56656d;--line:#d6e0e5;--border:#7d8e97;--band:#2aa3cc;--band-fg:#0f2f3c;--accent:#0d5878;--accent-soft:#e3f1f7;--btn:#0b4f6c;--btn-fg:#fff;--note-bg:#fff8d6;--note-line:#d9b730;--note-fg:#6a5508;--ok:#17663a;--ok-bg:#eaf6ee;--warn-bg:#fff0e0;--warn-line:#d9771f;--warn-fg:#8a3c00;--c-blue:#0d5878;--c-green:#17663a;--c-red:#b3261e;--c-orange:#9a4a00;--c-purple:#5b3f99;--hl:#fff09a;--font-display:"Lexend","Segoe UI",system-ui,sans-serif;--font-body:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#11181c;--surface:#19232a;--fg:#e3eaee;--muted:#9fb0b8;--line:#2c3a42;--border:#6b7d86;--band:#1b6f8c;--band-fg:#eaf7fc;--accent:#6cc3e4;--accent-soft:#1d3440;--btn:#2a8db3;--btn-fg:#0b1a20;--note-bg:#2e2810;--note-line:#9c8420;--note-fg:#e9d27a;--ok:#7fd79b;--ok-bg:#16281d;--warn-bg:#33210f;--warn-line:#c27a2e;--warn-fg:#ffc48a;--c-blue:#6cc3e4;--c-green:#7fd79b;--c-red:#ff8a80;--c-orange:#ffb067;--c-purple:#c4a8ff;--hl:#5a4b00;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6}
+[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:16px;top:8px;z-index:20;background:var(--btn);color:var(--btn-fg);padding:10px 14px;border-radius:5px;font-weight:700;transform:translateY(-200%)}.skip:focus{transform:none}
+.topbar{background:var(--band);color:var(--band-fg);border-bottom:3px solid var(--accent);padding:12px max(16px,env(safe-area-inset-left,0px))}.topbar strong{font-family:var(--font-display);font-weight:600}
+.wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;max-width:none;margin:0;padding:24px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px));align-items:start}
+.nav{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 16px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
+.nav-title{font-family:var(--font-display);font-size:.98rem;font-weight:600;line-height:1.45;margin:0 0 12px}
+.nav ol{list-style:none;margin:0 0 16px;padding:0;counter-reset:p;display:grid;gap:2px}.nav li{counter-increment:p}
+.nav ol a{display:grid;grid-template-columns:1.8em 1fr;color:var(--fg);text-decoration:none;font-size:.95rem;line-height:1.4;padding:5px 6px;border-radius:4px}
+.nav ol a::before{content:counter(p) ".";color:var(--muted)}.nav ol a:hover{background:var(--accent-soft)}.nav ol a[aria-current=page]{color:var(--accent);font-weight:700;background:var(--accent-soft)}
+.btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--btn);color:var(--btn-fg);border:0;border-radius:5px;padding:11px 14px;font:600 .95rem/1.3 var(--font-body);cursor:pointer;text-align:left}
+.dl-msg{font-size:.85rem;color:var(--muted);margin:8px 2px 0;min-height:1.2em}.nav-toggle{display:none}
+.page{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px 32px 32px;min-width:0}
+.page h1{font-family:var(--font-display);font-weight:600;color:var(--accent);font-size:1.75rem;line-height:1.3;margin:0 0 22px;padding-bottom:14px;border-bottom:3px solid var(--accent)}
+.page h1:focus{outline:none}
+.lesson-body h2{font-size:1.12rem;font-weight:700;margin:24px 0 8px}.lesson-body h3{font-size:1rem;font-weight:700;margin:18px 0 6px}
+.lesson-body p,.lesson-body li{max-width:none}.lesson-body p{margin:0 0 12px}.lesson-body ul,.lesson-body ol{margin:0 0 14px;padding-left:1.4em}.lesson-body li{margin-bottom:5px}.lesson-body a{color:var(--accent)}
+.lesson-body table{border-collapse:collapse;width:100%;margin:6px 0 16px}.lesson-body th,.lesson-body td{border:1px solid var(--border);padding:7px 10px;text-align:left;vertical-align:top}.lesson-body thead th{background:var(--accent-soft)}
+.table-scroll,.table-wrap{overflow-x:auto;position:relative}.lesson-body img{max-width:100%;height:auto}.lesson-body figure{margin:8px 0 16px}
+figure.svgfig{background:#fff;color:#1f2a30;border:1px solid var(--line);border-radius:6px;padding:10px;display:block;width:100%;max-width:640px}figure.svgfig svg{width:100%;height:auto;display:block}
+.video-responsive iframe,.video-responsive video{max-width:100%;height:auto;aspect-ratio:5/3;border:0;background:#000}figure.video-fig{max-width:680px}figure[data-size] img,figure[data-size] video,figure[data-size] svg{width:100%;height:auto}figure.video-fig video{width:100%;border-radius:6px;background:#000;display:block}figcaption{font-size:.9rem;color:var(--muted);margin-top:4px}
+.credit{font-size:.8rem;color:var(--muted);margin-top:4px}.credit summary{cursor:pointer;display:inline-block;list-style:none;padding:2px 0}.credit summary::-webkit-details-marker{display:none}.credit summary::before{content:"ⓘ "}.credit p{margin:2px 0 0!important;font-size:.8rem}.credit a{color:var(--muted)}figure.svgfig .credit{color:#56656d}.credit-center{text-align:center}
+.callout{border-left:4px solid;border-radius:0 6px 6px 0;padding:12px 16px 4px;margin:16px 0}.callout-title{font-family:var(--font-display);font-weight:600;margin:0 0 6px!important}
+.callout-blue{background:var(--accent-soft);border-color:var(--accent)}.callout-blue .callout-title{color:var(--accent)}
+.callout-yellow{background:var(--note-bg);border-color:var(--note-line)}.callout-yellow .callout-title{color:var(--note-fg)}
+.callout-green{background:var(--ok-bg);border-color:var(--ok)}.callout-green .callout-title{color:var(--ok)}
+.callout-orange{background:var(--warn-bg);border-color:var(--warn-line)}.callout-orange .callout-title{color:var(--warn-fg)}
+.exo{border-top:1px solid var(--line);padding-top:10px;margin-bottom:14px}.exo-title{font-size:.92rem!important;color:var(--muted);margin:0 0 4px!important}
+.solution{color:var(--ok);background:var(--ok-bg);border-left:4px solid var(--ok);border-radius:0 5px 5px 0;padding:10px 14px 2px;margin:4px 0 14px;overflow-x:auto}.solution p{margin:0 0 8px}
+.sol-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:2px 0 8px;padding:10px 18px;background:var(--btn);color:var(--btn-fg);border:0;border-radius:5px;font:700 1rem/1.2 var(--font-body);cursor:pointer}
+.math[data-display="1"]{display:block;text-align:center;margin:8px 0;overflow-x:auto}
+.c-blue{color:var(--c-blue)}.c-green{color:var(--c-green)}.c-red{color:var(--c-red)}.c-orange{color:var(--c-orange)}.c-purple{color:var(--c-purple)}.hl{background:var(--hl);padding:0 2px;border-radius:2px}
+.checklist{list-style:none;padding:0!important;display:grid;gap:10px}.checklist li{border:1px solid var(--line);border-radius:6px;padding:10px 12px;max-width:none}.checklist label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.checklist input{width:22px;height:22px;accent-color:var(--ok);flex:none;margin-top:2px}.checklist .practice{margin:6px 0 0 32px;font-size:.92rem}
+.progress-track{height:14px;background:var(--accent-soft);border:1px solid var(--border);border-radius:999px;overflow:hidden;max-width:480px}.progress-fill{height:100%;width:0;background:var(--ok);transition:width .3s}.progress-text{color:var(--muted)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line);flex-wrap:wrap}.pager a{color:var(--accent);font-weight:600;max-width:48%}.pager .next{margin-left:auto;text-align:right}
+.print-only{display:none}
+@media (max-width:1100px){.wrap{grid-template-columns:220px minmax(0,1fr);gap:16px}.page{padding:24px 24px 28px}.page h1{font-size:1.55rem}}
+@media (max-width:800px){.wrap{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:16px}.nav{position:static;max-height:none}.nav-toggle{display:flex;justify-content:space-between;width:100%;background:none;border:0;color:var(--fg);font:600 .98rem/1.4 var(--font-display);padding:0;cursor:pointer;min-height:44px;align-items:center}.nav-title{display:none}.nav.collapsed ol,.nav.collapsed .btn,.nav.collapsed .dl-msg{display:none}.page{padding:22px 18px}.page h1{font-size:1.4rem}}
+@media (max-width:480px){body{font-size:16px}.page{padding:18px 14px;border-radius:0;border-left:0;border-right:0}.callout{padding:10px 12px 2px}.solution{padding:8px 10px 2px}.checklist .practice{margin-left:0}}
+@media print{:root{--bg:#fff;--surface:#fff;--fg:#1f2a30;--muted:#4f5f67;--accent:#0d5878;--accent-soft:#e3f1f7;--ok:#17663a;--ok-bg:#eaf6ee;--note-bg:#fff8d6;--note-fg:#6a5508;--warn-bg:#fff0e0;--warn-fg:#8a3c00;color-scheme:light}
+@page{size:letter;margin:16mm 15mm}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff;font-size:11.5pt}
+.topbar,.skip,.nav,.pager,.sol-btn,.progress{display:none!important}.wrap{display:block;padding:0;max-width:none}.page{border:0;padding:0}
+.print-only{display:block}.print-cover{break-after:page;padding-top:30mm}.print-cover .pc-course{font-family:var(--font-display);color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase}.print-cover .pc-title{font-family:var(--font-display);font-size:28pt;font-weight:600;color:var(--accent);margin:0 0 18mm}.print-cover .pc-toc-h{font-weight:700;border-bottom:2px solid var(--accent);padding-bottom:4px}
+main section,main section[hidden],.solution,.solution[hidden]{display:block!important}main section{break-before:page}.exo,.callout,tr,figure{break-inside:avoid}h2,h3{break-after:avoid}.table-scroll{overflow:visible}
+.video a::after{content:" – " attr(href);font-size:9pt;color:var(--muted)}figure.video-fig video{display:none}figure.video-fig figcaption{font-size:11pt;color:var(--fg)}.video-responsive{display:none!important}.video-print{font-weight:600}.credit summary{display:none}.credit p{color:#4f5f67}.solution::before{content:"Solution";display:block;font-weight:700;font-size:9.5pt;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}}
+@media (prefers-reduced-motion:reduce){.progress-fill{transition:none}}</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="topbar"><strong>Physique</strong></header>
+<div class="wrap">
+<nav class="nav collapsed" id="nav" aria-labelledby="navTitle">
+<button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navList"><span><span class="sr-only">Menu des pages, page actuelle : </span><span id="navCurrent">Pages</span></span><span aria-hidden="true">▾</span></button>
+<p class="nav-title" id="navTitle">La chute libre</p>
+<ol id="navList"></ol>
+<button type="button" class="btn" id="dlBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Toute la leçon en PDF</button>
+<p class="dl-msg" id="dlMsg" aria-live="polite"></p>
+</nav>
+<main class="page lesson-body" id="contenu" tabindex="-1">
+<div class="print-only print-cover"><p class="pc-course">Physique</p><p class="pc-title">La chute libre</p><p class="pc-toc-h">Table des matières</p><ol class="pc-toc"><li><a href="#page1">Activation des connaissances antérieures</a></li><li><a href="#page2">Les objectifs de la section</a></li><li><a href="#page3">D&#39;Aristote à Galilée</a></li><li><a href="#page4">Principe d&#39;un mouvement accéléré</a></li><li><a href="#page5">Laboratoire : accélération gravitationnelle</a></li><li><a href="#page6">Accélération gravitationnelle</a></li><li><a href="#page7">PNMI et chute libre</a></li><li><a href="#page8">Pratique guidée</a></li><li><a href="#page9">La vitesse ultime</a></li><li><a href="#page10">Résumé</a></li><li><a href="#page11">Pratique autonome</a></li><li><a href="#page12">Retour sur les objectifs</a></li><li><a href="#page13">Révision</a></li></ol></div>
+<section id="page1" data-title="Activation des connaissances antérieures">
+<h1 tabindex="-1">Activation des connaissances antérieures</h1>
+<div role="note" class="note"><br></div><div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-1.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="Vidéo"></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></div>
+<p class="print-only video-print">▶ Vidéo : Vidéo</p><p></p>
+  <h2>Gravité</h2>
+  <p>Force sans contact qui tire les objets vers le sol.</p>
+  <h2>Mouvement accéléré</h2>
+  <p>Mouvement dans lequel la vitesse de l'objet augmente au cours du temps.</p>
+  <p>Les variables et les unités sont la distance (m), la vitesse initiale (m/s), la vitesse finale (m/s), l'accélération (m/s²) et le temps (s).</p>
+  <div class="callout callout-blue">
+    <p class="callout-title">Rappel</p>
+    <p>L'accélération indique de combien la vitesse change à chaque seconde. Une accélération de −9,81 m/s² signifie que la vitesse vers le bas augmente de 9,81 m/s à chaque seconde.</p>
+    <div aria-label="Vitesse selon le temps" role="region" class="table-wrap table-scroll"><table class="mini">
+      <caption class="sr-only">Vitesse vers le bas d'un objet en chute libre selon le temps</caption>
+      <thead><tr><th scope="col">Temps</th><th scope="col">Vitesse vers le bas</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Après 1 s</th><td>9,81 m/s</td></tr>
+        <tr><th scope="row">Après 2 s</th><td>19,62 m/s</td></tr>
+        <tr><th scope="row">Après 3 s</th><td>29,43 m/s</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="callout callout-think callout-yellow">
+    <p class="callout-title">Réflexion de départ</p>
+    <p>Prends une feuille de papier et une boule faite avec une feuille identique. Elles ont la même masse. Laisse-les tomber en même temps, de la même hauteur.</p>
+    <ul>
+      <li>Que remarques-tu?</li>
+      <li>Qu'est-ce qui explique la différence?</li>
+    </ul>
+    <p class="callout-foot">Garde ta réponse en tête : nous y reviendrons pendant la leçon.</p>
+  </div>
+</section>
+<section id="page2" data-title="Les objectifs de la section" hidden>
+<h1 tabindex="-1">Les objectifs de la section</h1>
+<p><strong>À la fin de cette section, l'élève sera capable d' :</strong></p>
+  <ul>
+    <li>Expliquer que le concept de l'analyse d'un objet en chute libre a évolué à mesure que de nouvelles preuves ont été découvertes et que la loi de la chute des corps a été testée (RAS – 20 – A 1.2 sts).</li>
+    <li>Expliquer qualitativement un objet en chute libre à partir de données fournies (RAS – 20 – A 1.3 c).</li>
+    <li>Expliquer quantitativement un objet en chute libre à partir de données fournies (RAS – 20 – A 1.3 c).</li>
+    <li>Expliquer que l'étude de la loi de la chute libre permet d'accroître la connaissance du monde naturel (RAS – 20 – A 1.1 sts).</li>
+  </ul>
+  <h2>À quoi ça sert?</h2>
+  <div role="note" class="note"><br></div><div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-2.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="A quoi ça sert la chute libre."></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>Envato</p></details></div>
+<p class="print-only video-print">▶ Vidéo : A quoi ça sert la chute libre.</p><p></p>
+  <h2>1. Sécurité et équipements</h2>
+  <ul>
+    <li><strong>Parachutisme :</strong> le calcul de la taille des parachutes repose sur la loi de la chute libre combinée à la résistance de l'air. Cela permet de faire un atterrissage en sécurité.</li>
+    <li><strong>Capteurs :</strong> certaines montres intelligentes possèdent des capteurs qui détectent les chutes et peuvent déclencher une alarme ou envoyer un signal d'urgence.</li>
+  </ul>
+  <h2>2. Ingénierie et architecture</h2>
+  <ul>
+    <li><strong>Sécurité des bâtiments :</strong> les ingénieurs l'utilisent pour calculer l'impact d'un objet qui tomberait d'un échafaudage ou d'un toit afin de concevoir des casques de chantier et des filets de protection efficaces.</li>
+    <li><strong>Destruction contrôlée :</strong> pour faire s'effondrer un vieil immeuble en toute sécurité, les experts en démolition calculent le temps et la trajectoire de chute des gravats.</li>
+    <li><strong>Les ascenseurs et monte-charges :</strong> les systèmes de freinage d'urgence des ascenseurs sont calibrés grâce aux lois de la chute libre verticale. Si les câbles lâchent, les capteurs détectent l'accélération verticale immédiate (9,81 m/s²) et déclenchent des freins mécaniques automatiques.</li>
+  </ul>
+  <h2>3. Loisirs et sensations fortes</h2>
+  <ul>
+    <li><strong>Les tours de chute libre (<span lang="en">Free Fall</span>) :</strong> dans les parcs d'attractions, une nacelle est hissée au sommet d'une tour verticale puis lâchée dans le vide. Pendant les premières secondes, les passagers subissent une chute libre verticale pure et ressentent l'apesanteur avant que des freins magnétiques ne ralentissent la nacelle en bas.</li>
+    <li><strong>Le saut à l'élastique :</strong> le début du saut est une chute libre verticale directe. La physique de la chute libre permet de calculer précisément la longueur maximale que l'élastique atteindra avant de se tendre, garantissant que le sauteur ne touche pas le sol.</li>
+  </ul>
+</section>
+<section id="page3" data-title="D&#39;Aristote à Galilée" hidden>
+<h1 tabindex="-1">D&#39;Aristote à Galilée</h1>
+<p>L'explication du concept de la chute libre ne s'est pas faite du jour au lendemain. Tout a commencé au 4<sup>e</sup> siècle avant Jésus-Christ.</p>
+  <p>Regarde la vidéo ci-dessous, générée par l'IA, pour comprendre cette démarche scientifique.</p>
+  <div role="note" class="note"><br></div><div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-3.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="D'Aristote à Galilée"></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>créée par Elevenlabs.</p></details></div>
+<p class="print-only video-print">▶ Vidéo : D'Aristote à Galilée</p><p></p>
+  <h2>La théorie de Galilée sur les objets en chute libre</h2>
+  <p>Il est vrai que des objets différents ne subissent pas la même accélération lorsqu'ils tombent, mais si nous négligeons la résistance de l'air, ils atteindront le sol en même temps. Galilée réfuta donc l'idée d'Aristote : si l'on néglige la résistance de l'air, un objet dont la masse est 10 fois plus grande que celle d'un autre ne tombera pas 10 fois plus vite.</p>
+  <h2>Preuve dans le vide</h2>
+  <p>Cette loi de la chute libre est très difficile à démontrer, à moins qu'on ne soit capable de faire le vide. Connais-tu un endroit où il n'y a pas d'air, c'est-à-dire le vide? L'espace!</p>
+  <p>En 1971, lors de la mission Apollo 15, l'astronaute David Scott a lâché simultanément un marteau de géologue et une plume de faucon. Il a donc fallu aller sur la Lune pour valider la théorie de Galilée.</p>
+  <p>Regarde la vidéo suivante et choisis les sous-titres en français.</p>
+  <p class="video"><a rel="noopener" target="_blank" href="https://commons.wikimedia.org/wiki/File:Apollo_15_feather_and_hammer_drop.ogv">Vidéo : Apollo 15, chute du marteau et de la plume (Wikimedia Commons)<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span></a></p>
+  <p>L'étude de la chute libre représente l'un des plus grands bouleversements de l'histoire des sciences, marquant le passage d'une philosophie qualitative et intuitive à une physique quantitative et expérimentale.</p>
+</section>
+<section id="page4" data-title="Principe d&#39;un mouvement accéléré" hidden>
+<h1 tabindex="-1">Principe d&#39;un mouvement accéléré</h1>
+<p>Grâce à Galilée, nous savons qu'un objet qui tombe vers la Terre accélère. En négligeant la résistance de l'air, l'objet est accéléré sous l'effet d'une seule force, la gravité.</p>
+  <p>À une hauteur de 10 m, en ne tenant pas compte de la résistance de l'air, une plume de 100 g et un camion de 2 000 kg en chute libre :</p>
+  <ul>
+    <li>subiront la même accélération;</li>
+    <li>toucheront en même temps le sol;</li>
+    <li>auront la même vitesse lorsqu'ils toucheront le sol.</li>
+  </ul>
+  <p>La vitesse finale d'un objet en chute libre ne dépend pas de sa masse, mais uniquement de sa vitesse initiale et de la hauteur à partir de laquelle il a été lancé. Plus un objet tombe de haut, plus sa vitesse à l'impact sera grande.</p>
+  <p>Vu que c'est un mouvement accéléré, on peut utiliser les 5 formules suivantes :</p>
+  <div class="callout callout-blue">
+    <p class="callout-title">Les 5 formules du mouvement accéléré</p>
+    <div aria-label="Variables de chaque formule" role="region" class="table-wrap table-scroll"><table class="eqtable">
+      <caption class="sr-only">Variables contenues dans chacune des 5 formules (un crochet indique que la variable est dans la formule)</caption>
+      <thead><tr><th scope="col">Équation</th><th class="chk" scope="col"><span data-tex="\Delta\vec{d}" class="math">\(\Delta\vec{d}\)</span></th><th class="chk" scope="col"><span data-tex="\vec{a}" class="math">\(\vec{a}\)</span></th><th class="chk" scope="col"><span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></th><th class="chk" scope="col"><span data-tex="\vec{v}_\text{i}" class="math">\(\vec{v}_\text{i}\)</span></th><th class="chk" scope="col"><span data-tex="\Delta t" class="math">\(\Delta t\)</span></th></tr></thead>
+      <tbody>
+        <tr><th class="eq" scope="row"><span data-tex="\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}" class="math">\(\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}\)</span></th><td class="chk"><span class="sr-only">non</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td></tr>
+        <tr><th class="eq" scope="row"><span data-tex="\Delta\vec{d} = \dfrac{(\vec{v}_\text{i} + \vec{v}_\text{f})\,\Delta t}{2}" class="math">\(\Delta\vec{d} = \dfrac{(\vec{v}_\text{i} + \vec{v}_\text{f})\,\Delta t}{2}\)</span></th><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span class="sr-only">non</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td></tr>
+        <tr><th class="eq" scope="row"><span data-tex="\Delta\vec{d} = \vec{v}_\text{i}\,\Delta t + \tfrac{1}{2}\vec{a}\,\Delta t^2" class="math">\(\Delta\vec{d} = \vec{v}_\text{i}\,\Delta t + \tfrac{1}{2}\vec{a}\,\Delta t^2\)</span></th><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span class="sr-only">non</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td></tr>
+        <tr><th class="eq" scope="row"><span data-tex="\Delta\vec{d} = \vec{v}_\text{f}\,\Delta t - \tfrac{1}{2}\vec{a}\,\Delta t^2" class="math">\(\Delta\vec{d} = \vec{v}_\text{f}\,\Delta t - \tfrac{1}{2}\vec{a}\,\Delta t^2\)</span></th><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span class="sr-only">non</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td></tr>
+        <tr><th class="eq" scope="row"><span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2\vec{a}\,\Delta\vec{d}" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2\vec{a}\,\Delta\vec{d}\)</span></th><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span aria-hidden="true">✓</span><span class="sr-only">oui</span></td><td class="chk"><span class="sr-only">non</span></td></tr>
+      </tbody>
+    </table></div>
+    <p>Pour choisir la bonne formule, nomme les variables connues, nomme l’inconnue et prends la formule qui ne contient pas la variable absente.</p>
+  </div><div class="callout callout-orange" data-kind="retenir"><p class="callout-title">À retenir</p><ul><li>En chute libre, la gravité est la seule force qui agit sur l'objet (on néglige la résistance de l'air).</li><li>Tous les objets en chute libre ont la même accélération, peu importe leur masse.</li><li>La vitesse finale dépend de la vitesse initiale et de la hauteur de chute, mais pas de la masse.</li><li>Plus un objet tombe de haut, plus sa vitesse à l'impact est grande.</li><li>Comme la chute libre est un mouvement accéléré, on peut utiliser les 5 formules du mouvement accéléré.</li></ul></div><div class="callout callout-blue" data-kind="verifie"><p class="callout-title">Vérifie ta compréhension</p><p>On lâche en même temps, du haut d'un édifice de 10 m, une balle de tennis de 58 g et une boule de bowling de 7 kg. On néglige la résistance de l'air. Laquelle touche le sol en premier? Laquelle a la plus grande vitesse à l'impact? Explique ta réponse.</p><div class="solution"><p>Sans résistance de l'air, la seule force qui agit sur chaque objet est la gravité. Les deux objets subissent donc la même accélération.</p><p>Ils partent du repos, tombent de la même hauteur et ont la même accélération. Ils touchent donc le sol en même temps.</p><p>La vitesse finale ne dépend que de la vitesse initiale et de la hauteur de chute, et non de la masse. Elle est donc la même pour les deux objets.</p><p><strong>Réponse :</strong> Les deux objets touchent le sol en même temps et ont la même vitesse à l'impact, car la masse n'influence pas le mouvement en chute libre.</p></div></div><div class="callout callout-orange" data-kind="piege"><p class="callout-title">Piège à éviter</p><p>Ne pense pas qu'un objet plus lourd tombe plus vite. Dans la vie courante, une feuille de papier tombe plus lentement qu'une pierre à cause de la <strong>résistance de l'air</strong>, et non à cause de sa masse. Si on néglige la résistance de l'air, tous les objets en chute libre subissent la même accélération.</p><p>Attention aussi : la masse n'influence pas la vitesse finale, mais la <strong>hauteur de chute</strong> et la <strong>vitesse initiale</strong> l'influencent.</p></div>
+</section>
+<section id="page5" data-title="Laboratoire : accélération gravitationnelle" hidden>
+<h1 tabindex="-1">Laboratoire : accélération gravitationnelle</h1>
+<h2><br></h2><div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-4.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="Vidéo"></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>Source à préciser.</p></details></div>
+<p class="print-only video-print">▶ Vidéo : Vidéo</p><p></p><h2>But de l’expérience</h2>
+  <p>Déterminer l’accélération de cinq objets en chute libre à partir de la hauteur de chute et du temps de chute, puis comparer les résultats à la valeur théorique de −9,81 m/s².</p>
+
+  <h2>Hypothèse</h2>
+  <p>Écris une hypothèse : les cinq objets auront-ils la même accélération? Explique ton raisonnement en pensant à la masse, à la forme et à la résistance de l’air. Utilise la forme « Si… alors… parce que… ».</p>
+
+  <h2>Matériel</h2>
+  <ul class="cols">
+    <li>Ballon de soccer</li>
+    <li>Balle de golf</li>
+    <li>Rondelle de hockey</li>
+    <li>Boule de papier</li>
+    <li>Crayon</li>
+    <li>Chronomètre (ou application chronomètre d’un téléphone)</li>
+    <li>Ruban à mesurer ou mètre</li>
+    <li>Ruban adhésif (pour marquer la hauteur de chute)</li>
+    <li>Calculatrice</li>
+    <li>Téléphone pour filmer au ralenti (facultatif)</li>
+  </ul>
+
+  <div role="note" class="callout callout-warn callout-yellow">
+    <p class="callout-title"><span aria-hidden="true">⚠ </span>Consignes de sécurité</p>
+    <ul>
+      <li>Garde la zone de chute dégagée.</li>
+      <li>Ne lâche pas d’objet au-dessus de quelqu’un.</li>
+      <li>La rondelle et la balle de golf sont dures : éloigne tes pieds de la zone d’impact.</li>
+      <li>Si tu montes sur un escabeau, assure-toi qu’il est stable et qu’un partenaire le tient.</li>
+      <li>Ramasse tout de suite les objets tombés pour éviter les glissades.</li>
+    </ul>
+  </div>
+
+  <h2>Démarche</h2>
+  <ol class="sub">
+    <li>Choisis une hauteur de chute (par exemple 2,0 m) et marque-la au mur avec du ruban adhésif.</li>
+    <li>Mesure précisément la hauteur avec le ruban à mesurer et note-la dans le tableau.</li>
+    <li>Place-toi à côté du mur et tiens le premier objet à la hauteur marquée, sans vitesse initiale (le bas de l’objet au niveau du ruban adhésif).</li>
+    <li>Fais un décompte à voix haute avec ton partenaire, puis lâche l’objet sans le pousser.</li>
+    <li>Ton partenaire démarre le chronomètre au moment du lâcher et l’arrête quand l’objet touche le sol.</li>
+    <li>Note le temps de chute dans le tableau.</li>
+    <li>Fais trois essais pour chaque objet, puis calcule le temps moyen.</li>
+    <li>Répète pour chacun des cinq objets.</li>
+    <li>Calcule l’accélération de chaque objet avec <span data-tex="\vec{a} = \dfrac{2\vec{d}}{t^2}" class="math">\(\vec{a} = \dfrac{2\vec{d}}{t^2}\)</span> (départ du repos, <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span> négatif vers le bas) en utilisant le temps moyen.</li>
+  </ol>
+
+  <h2>Observations et données</h2>
+  <div aria-label="Tableau des observations" role="region" class="table-wrap table-scroll"><table class="lab">
+    <caption class="sr-only">Hauteur, temps des trois essais, temps moyen et accélération de chaque objet (à remplir)</caption>
+    <thead><tr><th scope="col">Objet</th><th scope="col">Hauteur (m)</th><th scope="col">Temps essai 1 (s)</th><th scope="col">Temps essai 2 (s)</th><th scope="col">Temps essai 3 (s)</th><th scope="col">Temps moyen (s)</th><th scope="col">Accélération (m/s²)</th></tr></thead>
+    <tbody>
+        <tr><th scope="row">Ballon de soccer</th><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td></tr>
+        <tr><th scope="row">Balle de golf</th><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td></tr>
+        <tr><th scope="row">Rondelle</th><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td></tr>
+        <tr><th scope="row">Boule de papier</th><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td></tr>
+        <tr><th scope="row">Crayon</th><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td><td class="blank"><span class="sr-only">à remplir</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Analyse</h2>
+  <ol class="sub">
+    <li>Quelle est l’accélération de chaque objet? Montre un calcul complet pour au moins un objet.</li>
+    <li>Les cinq accélérations sont-elles égales? Compare-les à −9,81 m/s².</li>
+    <li>Quels objets s’éloignent le plus de −9,81 m/s²? Explique avec la résistance de l’air (masse, forme, surface).</li>
+    <li>Quelles sources d’erreur ont influencé tes mesures (temps de réaction, hauteur, lâcher avec une petite poussée, etc.)? Indique si chacune rend l’accélération calculée trop grande ou trop petite.</li>
+    <li>Pourquoi faire trois essais et calculer une moyenne améliore-t-il la fiabilité des résultats?</li>
+    <li>Propose deux améliorations pour obtenir des résultats plus précis (par exemple une plus grande hauteur ou l’analyse d’une vidéo au ralenti).</li>
+  </ol>
+
+  <h2>Conclusion</h2>
+  <p>Réponds au but du laboratoire en donnant les accélérations obtenues. Dis si ton hypothèse était confirmée et utilise tes résultats pour justifier ta réponse. Explique ce qui se passerait dans le vide et fais le lien avec les travaux de Galilée et l’expérience d’Apollo 15.</p>
+</section>
+<section id="page6" data-title="Accélération gravitationnelle" hidden>
+<h1 tabindex="-1">Accélération gravitationnelle</h1>
+<p>L'accélération que subit un objet en chute libre sur Terre est appelée accélération due à la gravité, ou accélération gravitationnelle, et est symbolisée par la lettre <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span>.</p>
+  <p>Si on néglige la résistance de l'air, quelle est la valeur de l'accélération gravitationnelle?</p>
+  <p>L'accélération gravitationnelle sur la Terre <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span> dépend d'un endroit à l'autre. Tu étudieras la raison lorsque tu verras le champ gravitationnel, mais en général, plus tu es loin du centre de la Terre, plus l'accélération gravitationnelle est faible. Le tableau suivant présente quelques valeurs de l'accélération gravitationnelle à différents endroits sur Terre.</p>
+  <div aria-label="Valeurs de g sur Terre" role="region" class="table-wrap table-scroll"><table>
+    <caption>Accélération gravitationnelle à différents endroits sur Terre</caption>
+    <thead><tr><th scope="col">Endroit</th><th scope="col">Accélération gravitationnelle g (m/s²)</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Edmonton</th><td>−9,812</td></tr>
+      <tr><th scope="row">Pôle Nord</th><td>−9,832</td></tr>
+      <tr><th scope="row">Toronto</th><td>−9,805</td></tr>
+      <tr><th scope="row">Washington</th><td>−9,801</td></tr>
+      <tr><th scope="row">Mont Everest</th><td>−9,765</td></tr>
+    </tbody>
+  </table></div>
+  <figure class="svgfig" role="img" aria-label="Schéma de la Terre montrant que l'accélération gravitationnelle est dirigée vers le centre de la Terre et que sa valeur est de −9,832 m/s² au pôle Nord, −9,812 m/s² à Edmonton, −9,805 m/s² à Toronto, −9,801 m/s² à Washington et −9,765 m/s² au mont Everest"><svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif"><defs><radialGradient id="gTerre" cx="35%" cy="30%" r="80%"><stop offset="0%" stop-color="#7fc4f0"></stop><stop offset="55%" stop-color="#2f7fc1"></stop><stop offset="100%" stop-color="#14477a"></stop></radialGradient><radialGradient id="gOmbre" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#000" stop-opacity="0.35"></stop><stop offset="100%" stop-color="#000" stop-opacity="0"></stop></radialGradient><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker></defs><rect x="0" y="0" width="600" height="400" fill="#f7fafc"></rect><ellipse cx="205" cy="372" rx="120" ry="9" fill="url(#gOmbre)"></ellipse><circle cx="200" cy="230" r="130" fill="url(#gTerre)" stroke="#0d3560" stroke-width="2"></circle><path d="M150,160 q25,-25 55,-8 q20,15 5,35 q-25,15 -45,5 q-20,-10 -15,-32 z" fill="#5fae5a" opacity="0.85"></path><path d="M235,215 q25,-8 40,12 q5,25 -15,35 q-25,0 -30,-22 q-2,-15 5,-25 z" fill="#5fae5a" opacity="0.85"></path><path d="M130,250 q20,-10 35,8 q8,25 -12,40 q-20,-5 -25,-25 z" fill="#5fae5a" opacity="0.85"></path><line x1="200" y1="230" x2="200" y2="100" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.8"></line><line x1="200" y1="230" x2="312.6" y2="165" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"></line><circle cx="200" cy="230" r="4" fill="#fff"></circle><text x="200" y="252" text-anchor="middle" font-size="12" fill="#fff">Centre</text><line x1="200" y1="55" x2="200" y2="96" stroke="#c0392b" stroke-width="3" marker-end="url(#fl)"></line><line x1="287.5" y1="78.4" x2="267" y2="114" stroke="#c0392b" stroke-width="3" marker-end="url(#fl)"></line><line x1="351.6" y1="142.5" x2="316" y2="163" stroke="#c0392b" stroke-width="3" marker-end="url(#fl)"></line><line x1="375" y1="230" x2="334" y2="230" stroke="#c0392b" stroke-width="3" marker-end="url(#fl)"></line><line x1="351.6" y1="317.5" x2="316" y2="297" stroke="#c0392b" stroke-width="3" marker-end="url(#fl)"></line><circle cx="200" cy="100" r="5" fill="#fff" stroke="#0d3560"></circle><circle cx="265" cy="117.4" r="5" fill="#fff" stroke="#0d3560"></circle><circle cx="312.6" cy="165" r="5" fill="#fff" stroke="#0d3560"></circle><circle cx="330" cy="230" r="5" fill="#fff" stroke="#0d3560"></circle><circle cx="312.6" cy="295" r="5" fill="#fff" stroke="#0d3560"></circle><text x="215" y="48" font-size="14" fill="#222"><tspan font-weight="bold">Pôle Nord</tspan> : −9,832 m/s²</text><text x="300" y="72" font-size="14" fill="#222"><tspan font-weight="bold">Edmonton</tspan> : −9,812 m/s²</text><text x="368" y="138" font-size="14" fill="#222"><tspan font-weight="bold">Toronto</tspan> : −9,805 m/s²</text><text x="388" y="224" font-size="14" fill="#222"><tspan font-weight="bold">Washington</tspan> : −9,801 m/s²</text><text x="368" y="326" font-size="14" fill="#222"><tspan font-weight="bold">Mont Everest</tspan> : −9,765 m/s²</text><text x="470" y="375" text-anchor="middle" font-size="12" fill="#444"></text></svg><br><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure>
+  <p>Pour nos calculs dans cette unité, nous supposerons que <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span> est toujours constant et nous utiliserons la valeur de −9,81 m/s². Tu n'as pas besoin de mémoriser cette valeur; elle se trouve sur ta feuille de formules.</p>
+</section>
+<section id="page7" data-title="PNMI et chute libre" hidden>
+<h1 tabindex="-1">PNMI et chute libre</h1>
+<p>Dans le Sud-Ouest de l'Alberta, tout près des contreforts des Rocheuses, on trouve le précipice à bisons de Head-Smashed-In. Pendant près de 6 000 ans, les peuples autochtones de la région utilisaient ce site pour tuer un grand nombre de bisons. Les chasseurs dirigeaient les bisons vers les hauteurs des collines Porcupine afin qu'ils tombent du haut d'une falaise d'environ 10 mètres. Il suffisait par la suite de dépecer les carcasses, ce qui fournissait une énorme quantité de nourriture, de fourrures et de matériaux pour les vêtements, les outils et les habitations.</p>
+  <p>Ce site fut probablement l'un des plus importants en Amérique, car les fouilles archéologiques ont permis de découvrir une couche d'environ 11 mètres d'épaisseur, composée de strates d'os découpés et d'outils en pierre utilisés par les peuples des Premières Nations. Ce site fournissait également de précieuses informations sur les coutumes de chasse et le mode de vie de ces peuples.</p>
+  <p>Le précipice à bisons Head-Smashed-In a été désigné lieu historique national du Canada en 1968, ressource historique provinciale de l'Alberta en 1979 et site du patrimoine mondial de l'UNESCO en 1981.</p>
+  <p>Si tu désires en apprendre davantage, visite les sites suivants :</p>
+  <ul>
+    <li><a rel="noopener" target="_blank" href="https://www.pc.gc.ca/apps/dfhd/page_nhs_fra.aspx?id=22">Parcs Canada : précipice à bisons Head-Smashed-In<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span></a></li>
+    <li><a rel="noopener" target="_blank" href="https://whc.unesco.org/fr/list/158/">UNESCO : liste du patrimoine mondial<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span></a></li>
+  </ul>
+  <h2>Problème</h2><div><br></div>
+  <figure class="svgfig" role="img" aria-label="Illustration du précipice à bisons Head-Smashed-In : un bison de 750 kg, au repos au sommet d'une falaise de 10,0 m, avec la trajectoire de sa chute, la hauteur indiquée à droite et sa vitesse finale inconnue au bas de l'escarpement. Les données du problème et les cairns des couloirs de rabattage sont aussi illustrés."><svg viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg" font-family="'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif">
+  <title>Précipice à bisons Head-Smashed-In : chute d'un bison de 10,0 m</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb3d9"></stop>
+      <stop offset="0.6" stop-color="#c4dcec"></stop>
+      <stop offset="1" stop-color="#efe6cf"></stop>
+    </linearGradient>
+    <linearGradient id="cliff" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b98f57"></stop>
+      <stop offset="0.55" stop-color="#cfa96f"></stop>
+      <stop offset="1" stop-color="#a77d49"></stop>
+    </linearGradient>
+    <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a7834f"></stop>
+      <stop offset="1" stop-color="#7d5f38"></stop>
+    </linearGradient>
+    <linearGradient id="grassTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9b36a"></stop>
+      <stop offset="1" stop-color="#a99550"></stop>
+    </linearGradient>
+    <linearGradient id="plain" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cdb878"></stop>
+      <stop offset="1" stop-color="#b09a5a"></stop>
+    </linearGradient>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1E5CB8"></path>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#C3372C"></path>
+    </marker>
+    <g id="bison">
+      <path d="M22,-102 C6,-96 2,-78 6,-60 C2,-52 4,-44 10,-42 C14,-50 12,-58 10,-64 C9,-78 14,-92 24,-98 Z" fill="#3b2414"></path>
+      <path d="M36,-62 L34,-8 L46,-8 L52,-60 Z" fill="#4a2e19"></path>
+      <path d="M62,-60 L64,-8 L76,-8 L78,-58 Z" fill="#3e2615"></path>
+      <path d="M20,-105 C12,-126 34,-140 72,-138 L152,-142 L156,-56 C124,-50 72,-50 42,-58 C22,-64 12,-86 20,-105 Z" fill="#5c3b22"></path>
+      <path d="M40,-120 C70,-128 110,-130 150,-128" stroke="#6e4a2c" stroke-width="3" fill="none" opacity="0.7"></path>
+      <path d="M170,-58 L168,-8 L182,-8 L190,-56 Z" fill="#2e1c0f"></path>
+      <path d="M198,-56 L200,-8 L214,-8 L216,-56 Z" fill="#2a190d"></path>
+      <rect x="33" y="-9" width="14" height="9" rx="2" fill="#1a110a"></rect>
+      <rect x="63" y="-9" width="14" height="9" rx="2" fill="#1a110a"></rect>
+      <rect x="167" y="-9" width="16" height="9" rx="2" fill="#1a110a"></rect>
+      <rect x="199" y="-9" width="16" height="9" rx="2" fill="#1a110a"></rect>
+      <path d="M118,-140 C136,-180 186,-190 212,-164 C232,-144 242,-118 246,-96 L250,-62 C238,-44 210,-40 192,-46 C186,-36 176,-30 166,-38 C160,-48 146,-52 128,-56 C122,-84 116,-114 118,-140 Z" fill="#3b2414"></path>
+      <path d="M150,-160 C160,-150 170,-120 168,-90 M180,-168 C190,-150 196,-120 192,-90 M200,-160 C212,-140 218,-115 214,-85" stroke="#4d3019" stroke-width="3" fill="none" stroke-linecap="round"></path>
+      <path d="M228,-112 C254,-112 272,-94 276,-66 C278,-48 268,-36 256,-38 C246,-40 238,-54 230,-70 Z" fill="#24150b"></path>
+      <path d="M232,-72 C228,-50 236,-30 248,-22 C250,-30 254,-36 256,-40 C246,-44 240,-56 236,-70 Z" fill="#1c1008"></path>
+      <path d="M244,-104 C248,-122 262,-126 268,-116 C262,-116 256,-110 254,-100 Z" fill="#e9dfc6" stroke="#5b4a30" stroke-width="1"></path>
+      <circle cx="259" cy="-84" r="2.6" fill="#f2e6c8"></circle>
+      <circle cx="272" cy="-52" r="2" fill="#0d0805"></circle>
+    </g>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#sky)"></rect>
+  <path d="M820,520 C920,470 1010,500 1100,460 C1190,425 1290,470 1380,440 C1460,415 1540,440 1600,425 L1600,820 L820,820 Z" fill="#a9b78f" opacity="0.75"></path>
+  <path d="M820,600 C960,570 1120,600 1260,575 C1400,552 1500,575 1600,565 L1600,820 L820,820 Z" fill="#c5b87e"></path>
+  <path d="M780,800 L1600,800 L1600,1000 L780,1000 Z" fill="url(#plain)"></path>
+  <g stroke="#9a8648" stroke-width="2" stroke-linecap="round" opacity="0.7">
+    <path d="M1060,960 l4,-12 M1066,962 l-2,-14 M1300,960 l3,-12 M1306,961 l-3,-13 M1420,975 l4,-11 M1180,920 l3,-12 M1186,901 l-2,-13 M1500,930 l3,-12 M980,930 l4,-12"></path>
+  </g>
+  <path d="M840,800 C880,770 930,775 980,790 C1010,796 1040,800 1060,800 Z" fill="#9c7b4c"></path>
+  <g fill="#8a6c42">
+    <ellipse cx="895" cy="790" rx="10" ry="5"></ellipse><ellipse cx="935" cy="786" rx="7" ry="4"></ellipse><ellipse cx="968" cy="793" rx="9" ry="4"></ellipse><ellipse cx="870" cy="796" rx="6" ry="3"></ellipse>
+  </g>
+
+  <path d="M0,300 L812,300 C826,301 836,308 840,322 L846,360 L838,390 L852,430 L846,470 L862,520 L856,560 L870,610 L864,650 L878,700 L872,745 L884,800 L884,1000 L0,1000 Z" fill="url(#earth)"></path>
+  <path d="M700,300 L812,300 C826,301 836,308 840,322 L846,360 L838,390 L852,430 L846,470 L862,520 L856,560 L870,610 L864,650 L878,700 L872,745 L884,800 L760,800 C770,640 740,460 700,300 Z" fill="url(#cliff)"></path>
+  <g stroke="#9a7444" stroke-width="3" fill="none" opacity="0.8" stroke-linecap="round">
+    <path d="M745,380 C785,384 815,380 842,378"></path>
+    <path d="M752,455 C790,460 820,452 848,456"></path>
+    <path d="M760,535 C800,540 830,532 860,536"></path>
+    <path d="M764,620 C805,624 838,616 868,620"></path>
+    <path d="M768,705 C808,710 845,700 876,704"></path>
+  </g>
+  <g stroke="#e3c793" stroke-width="2" fill="none" opacity="0.7">
+    <path d="M760,410 C795,414 820,410 840,412"></path>
+    <path d="M770,580 C805,584 835,578 862,580"></path>
+  </g>
+  <g stroke="#6f5331" stroke-width="2" fill="none" opacity="0.5">
+    <path d="M0,420 C200,412 450,428 700,418"></path>
+    <path d="M0,560 C220,552 470,566 730,558"></path>
+    <path d="M0,700 C240,692 480,704 760,698"></path>
+  </g>
+  <path d="M0,286 L812,286 C824,287 834,294 838,304 L812,304 L0,304 Z" fill="url(#grassTop)"></path>
+  <g stroke="#8f7c3a" stroke-width="2" stroke-linecap="round">
+    <path d="M40,290 l3,-12 M46,291 l-2,-13 M160,290 l4,-11 M166,291 l-3,-12 M300,290 l3,-12 M306,291 l-2,-13 M420,290 l4,-11 M560,290 l3,-12 M566,291 l-2,-13 M780,290 l3,-11"></path>
+  </g>
+  <g fill="#8d8a80" stroke="#5d5a52" stroke-width="1.2">
+    <path d="M120,286 c0,-12 8,-18 14,-18 c6,0 14,6 14,18 Z"></path>
+    <path d="M260,286 c0,-12 8,-18 14,-18 c6,0 14,6 14,18 Z"></path>
+    <path d="M400,286 c0,-12 8,-18 14,-18 c6,0 14,6 14,18 Z"></path>
+    <path d="M520,286 c0,-10 7,-15 12,-15 c5,0 12,5 12,15 Z"></path>
+  </g>
+  <text x="330" y="258" font-size="17" fill="#3c3424" text-anchor="middle" font-style="italic">cairns des couloirs de rabattage</text>
+
+  
+  <g>
+    <rect x="600" y="84" width="210" height="78" rx="8" fill="#ffffff" fill-opacity="0.92" stroke="#2F7D4F" stroke-width="2"></rect>
+    <text x="705" y="116" font-size="24" font-weight="700" fill="#2F7D4F" text-anchor="middle">m = 750 kg</text>
+    <text x="705" y="148" font-size="19" fill="#1D2830" text-anchor="middle">v₁ = 0 (au repos)</text>
+    <path d="M705,162 L712,186" stroke="#2F7D4F" stroke-width="2"></path>
+  </g>
+
+  <path d="M800,262 C840,262 880,330 905,450 C920,560 926,680 928,772" stroke="#C3372C" stroke-width="3" stroke-dasharray="10 8" fill="none"></path>
+  <line x1="928" y1="690" x2="928" y2="790" stroke="#C3372C" stroke-width="6" marker-end="url(#arrRed)"></line>
+  <g>
+    <rect x="948" y="696" width="150" height="48" rx="8" fill="#ffffff" fill-opacity="0.92" stroke="#C3372C" stroke-width="2"></rect>
+    <text x="1023" y="729" font-size="28" font-weight="700" fill="#C3372C" text-anchor="middle">v₂ = ?</text>
+  </g>
+
+  <g stroke="#1E5CB8" stroke-width="2" stroke-dasharray="6 6">
+    <line x1="842" y1="300" x2="1210" y2="300"></line>
+    <line x1="884" y1="800" x2="1210" y2="800"></line>
+  </g>
+  <line x1="1180" y1="306" x2="1180" y2="794" stroke="#1E5CB8" stroke-width="4" marker-start="url(#arrBlue)" marker-end="url(#arrBlue)"></line>
+  <rect x="1196" y="524" width="176" height="52" rx="8" fill="#ffffff" fill-opacity="0.92" stroke="#1E5CB8" stroke-width="2"></rect>
+  <text x="1284" y="560" font-size="30" font-weight="700" fill="#1E5CB8" text-anchor="middle">h = 10,0 m</text>
+
+  <text x="1230" y="290" font-size="20" fill="#1D2830">sommet : Eₚ = mgh, Eₖ = 0</text>
+  <text x="1230" y="830" font-size="20" fill="#1D2830">niveau de référence : Eₚ = 0</text>
+  <text x="1230" y="856" font-size="20" fill="#1D2830">bas : Eₖ = ½mv₂²</text>
+
+  <g>
+    <rect x="36" y="32" width="430" height="200" rx="12" fill="#ffffff" fill-opacity="0.92" stroke="#7F8A90" stroke-width="2"></rect>
+    <text x="58" y="70" font-size="24" font-weight="700" fill="#1D2830">Données</text>
+    <text x="58" y="106" font-size="22" fill="#2F7D4F">m = 750 kg</text>
+    <text x="58" y="138" font-size="22" fill="#1E5CB8">h = 10,0 m</text>
+    <text x="250" y="106" font-size="22" fill="#1D2830">v₁ = 0 m/s</text>
+    <text x="250" y="138" font-size="22" fill="#1D2830">g = 9,81 m/s²</text>
+    <text x="58" y="172" font-size="22" font-weight="700" fill="#C3372C">v₂ = ?</text>
+    <text x="58" y="210" font-size="18" fill="#4F5C64">On néglige la résistance de l'air.</text>
+  </g>
+
+  <text x="1580" y="62" font-size="34" font-weight="700" fill="#1D2830" text-anchor="end">Précipice à bisons Head-Smashed-In</text>
+  <text x="1580" y="96" font-size="20" fill="#1D2830" text-anchor="end" font-style="italic">Estipah-skikikini-kots · sud-ouest de l'Alberta</text>
+
+  <g>
+    <rect x="36" y="610" width="660" height="150" rx="12" fill="#fffaf0" fill-opacity="0.9" stroke="#6f5331" stroke-width="1.5"></rect>
+    <text x="58" y="646" font-size="20" font-weight="700" fill="#3c2a14">Un site des Pieds-Noirs (Siksikaitsitapi)</text>
+    <text x="58" y="678" font-size="18" fill="#3c2a14">Pendant près de 6 000 ans, les chasseurs pieds-noirs ont guidé</text>
+    <text x="58" y="704" font-size="18" fill="#3c2a14">les troupeaux de bisons le long de couloirs de cairns jusqu'au</text>
+    <text x="58" y="730" font-size="18" fill="#3c2a14">précipice. Site du patrimoine mondial de l'UNESCO.</text>
+  </g>
+</svg><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure>
+  <p>Si on suppose un bison ayant une masse de 750 kg qui se trouve au sommet du précipice à Bison's Head-Smashed-In d'une hauteur de 10,0 m, quelle serait sa vitesse lorsqu'il frappera le bas de l'escarpement?</p>
+  <div class="exo-sol">
+      
+      <div id="sol-p7" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -10{,}0\ \text{m}" class="math">\(\vec{d} = -10{,}0\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></p>
+        <div class="steps"><p>La masse (750 kg) n’est pas nécessaire : en chute libre, la vitesse ne dépend pas de la masse.</p><p>On n’a pas le temps, on utilise donc <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p><span data-display="1" data-tex="v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-10{,}0) = 196{,}2\ \text{m}^2/\text{s}^2" class="math">\[v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-10{,}0) = 196{,}2\ \text{m}^2/\text{s}^2\]</span></p><p><span data-display="1" data-tex="v_\text{f} = \sqrt{196{,}2} = 14{,}0\ \text{m/s}" class="math">\[v_\text{f} = \sqrt{196{,}2} = 14{,}0\ \text{m/s}\]</span></p><p>Le bison se déplace vers le bas, la vitesse est donc négative.</p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -14{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -14{,}0\ \text{m/s}\)</span>, soit 14,0 m/s vers le bas.</p>
+      </div>
+  </div>
+</section>
+<section id="page8" data-title="Pratique guidée" hidden>
+<h1 tabindex="-1">Pratique guidée</h1>
+<div class="exos">
+    <div class="exo">
+      <h2 class="exo-h exo-title">Problème 1</h2>
+      <p>La tour de Calgary est un des symboles de la métropole. Si une personne se trouve au sommet de la tour et laisse tomber un objet de 5,00 kg, et que celui-ci met 6,24 s à tomber, quelle est la hauteur de la tour de Calgary?</p>
+            
+      <div id="sol-g1" class="solution">
+        <div class="table-scroll"><table><tbody><tr><td>&nbsp;
+<p style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Données :</strong> <span class="math" data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span class="math" data-tex="t = 6{,}24\ \text{s}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(t = 6{,}24\ \text{s}\)</span>; <span class="math" data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Inconnue :</strong> <span class="math" data-tex="\vec{d}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{d}\)</span> (hauteur de la tour)</p><div class="steps" style="box-sizing: border-box; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><p style="box-sizing: border-box; margin: 0px 0px 8px;">La masse (5,00 kg) n’est pas nécessaire.</p><p style="box-sizing: border-box; margin: 0px 0px 8px;">On utilise <span class="math" data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span>.</p><p style="box-sizing: border-box; margin: 0px 0px 8px;"><span class="math" data-tex="\vec{d} = (0)(6{,}24) + \tfrac{1}{2}(-9{,}81)(6{,}24)^2" data-display="1" style="box-sizing: border-box; white-space: normal; display: block; text-align: center; margin: 8px 0px; overflow-x: auto; cursor: pointer; border-radius: 3px;">\[\vec{d} = (0)(6{,}24) + \tfrac{1}{2}(-9{,}81)(6{,}24)^2\]</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px;"><span class="math" data-tex="\vec{d} = -191\ \text{m}" data-display="1" style="box-sizing: border-box; white-space: normal; display: block; text-align: center; margin: 8px 0px; overflow-x: auto; cursor: pointer; border-radius: 3px;">\[\vec{d} = -191\ \text{m}\]</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px;">Le signe négatif indique que l’objet descend de 191 m.</p></div><p class="sol-answer" style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Réponse :</strong> La tour de Calgary mesure environ 191 m.</p>
+
+</td><td>&nbsp;<div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-5.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="Vidéo"></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></div>
+<p class="print-only video-print">▶ Vidéo : Vidéo</p></td></tr></tbody></table></div><p><br></p>
+      </div>
+    </div>
+    <div class="exo">
+      <h2 class="exo-h exo-title">Problème 2</h2>
+      <p>La passerelle Columbia Icefield Skywalk est située dans le parc national de Jasper et est en forme d'un demi-cercle suspendu à 280 m au-dessus de la vallée de Sunwapta. Supposons qu'un touriste prenant une photo avec son téléphone intelligent échappe son appareil, quelle sera la vitesse du téléphone lorsqu'il frappera le sol?</p>
+            
+      <div id="sol-g2" class="solution">
+        <div class="table-scroll"><table><tbody><tr><td>&nbsp;
+<p style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Données :</strong> <span class="math" data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span class="math" data-tex="\vec{d} = -280\ \text{m}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{d} = -280\ \text{m}\)</span>; <span class="math" data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Inconnue :</strong> <span class="math" data-tex="\vec{v}_\text{f}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{v}_\text{f}\)</span></p><div class="steps" style="box-sizing: border-box; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><p style="box-sizing: border-box; margin: 0px 0px 8px;">On n’a pas le temps, on utilise <span class="math" data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p style="box-sizing: border-box; margin: 0px 0px 8px;"><span class="math" data-tex="v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-280) = 5\,494\ \text{m}^2/\text{s}^2" data-display="1" style="box-sizing: border-box; white-space: normal; display: block; text-align: center; margin: 8px 0px; overflow-x: auto; cursor: pointer; border-radius: 3px;">\[v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-280) = 5\,494\ \text{m}^2/\text{s}^2\]</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px;"><span class="math" data-tex="v_\text{f} = \sqrt{5\,494} = 74{,}1\ \text{m/s}" data-display="1" style="box-sizing: border-box; white-space: normal; display: block; text-align: center; margin: 8px 0px; overflow-x: auto; cursor: pointer; border-radius: 3px;">\[v_\text{f} = \sqrt{5\,494} = 74{,}1\ \text{m/s}\]</span></p><p style="box-sizing: border-box; margin: 0px 0px 8px;">Le téléphone descend : la vitesse est négative.</p></div><p class="sol-answer" style="box-sizing: border-box; margin: 0px 0px 8px; color: rgb(23, 102, 58); font-family: &quot;Source Sans 3&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box;">Réponse :</strong> <span class="math" data-tex="\vec{v}_\text{f} = -74{,}1\ \text{m/s}" style="box-sizing: border-box; white-space: nowrap; cursor: pointer; border-radius: 3px;">\(\vec{v}_\text{f} = -74{,}1\ \text{m/s}\)</span>, soit 74,1 m/s vers le bas (en négligeant la résistance de l’air).</p>
+
+</td><td>&nbsp;<div class="video-responsive iframe">
+    <p style="text-align: center;"><iframe src="video/video-6.mp4" width="500" height="300" frameborder="0" allow="autoplay" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" title="Vidéo"></iframe></p>
+</div>
+<div class="credit-center"><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></div>
+<p class="print-only video-print">▶ Vidéo : Vidéo</p></td></tr></tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="page9" data-title="La vitesse ultime" hidden>
+<h1 tabindex="-1">La vitesse ultime</h1>
+<p>Si on néglige la résistance de l'air, tu as vu que la seule force agissant sur un objet en chute libre est la force gravitationnelle exercée par la Terre. Dans ce cas précis, tous les objets, quelle que soit leur masse, subiront la même accélération.</p><p></p>
+  <p>En réalité, tous les objets tombant dans l'atmosphère sont soumis à la résistance de l'air. Cette résistance de l'air dépendra de la masse, de la forme et de la vitesse initiale de l'objet. Cela implique donc que chaque objet aura sa propre accélération.</p>
+  <p>Dans ce type de situation, nous devons considérer deux forces lors de la chute de l'objet :</p>
+  <ul>
+    <li>la force gravitationnelle;</li>
+    <li>la force de frottement avec l'air.</li>
+  </ul>
+  <p>Prenons l'exemple du parachutisme pour bien le comprendre. Lorsque le parachutiste quitte l'avion, les deux forces agissent sur lui comme le montre le schéma ci-dessous.</p>
+  <div role="note" class="note"><br></div><div class="table-scroll"><table><thead><tr><th scope="col">Étape 1</th><th scope="col">Étape 2</th><th scope="col">Étape 3</th><th scope="col">Étape 4</th></tr></thead><tbody><tr><td><figure><img alt="Au début du saut, la force gravitationnelle (Fg) est plus grande que le frottement de l'air (Ff) : Fg &gt; Ff, donc le parachutiste accélère." src="image/image-1.svg"><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure></td><td><figure><img src="image/image-2.svg" alt="Le parachutiste accélère toujours : le frottement de l'air augmente, mais reste inférieur à la force gravitationnelle, donc la vitesse croît de moins en moins vite."><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure></td><td><figure><img src="image/image-3.svg" alt="Un parachutiste en chute libre, en position horizontale, subit une force de frottement de l'air vers le haut égale à la force de gravité vers le bas : les forces s'équilibrent, donc sa vitesse reste constante (vitesse ultime)."><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure></td><td><figure><img alt="Après l'ouverture du parachute, le frottement de l'air (Ff) devient supérieur à la force gravitationnelle (Fg), ce qui fait fortement ralentir le parachutiste." src="image/image-4.svg"><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure></td></tr></tbody></table></div><p></p><p></p><p></p><p></p>
+  <figure><img src="image/image-5.svg" alt="Le graphique montre la vitesse d'un parachutiste : elle augmente puis se stabilise à une vitesse ultime, avant de diminuer brusquement à l'ouverture du parachute et de se stabiliser à une vitesse ultime plus faible."><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure><p></p><p>Au début de la chute, la force gravitationnelle est supérieure à la force de frottement avec l'air, mais à mesure que sa vitesse augmente, la force de frottement augmente également.</p>
+  <p><em class="rappel">Rappelle-toi : lorsque tu es en voiture et que tu sors la main de la fenêtre. Plus la vitesse de la voiture est élevée, plus la résistance de l'air augmente.</em></p>
+  <p>C'est le même principe pour le parachutisme. Cette force de résistance de l'air augmente jusqu'à atteindre la même valeur que la force gravitationnelle.</p>
+  <p>À ce point où les deux forces sont équilibrées, le parachutiste ne subit plus d'accélération et se déplace donc à une vitesse constante, appelée <strong>vitesse ultime</strong>.</p>
+  <p>Chaque objet a sa propre vitesse ultime.</p>
+  <ul>
+    <li>Plus sa masse est grande, plus sa vitesse ultime est grande.</li>
+    <li>Plus sa surface de contact avec l'air augmente, plus sa vitesse ultime diminue.</li>
+  </ul>
+  <p>Par exemple, une roche a une vitesse ultime plus grande qu'une plume.</p>
+</section>
+<section id="page10" data-title="Résumé" hidden>
+<h1 tabindex="-1">Résumé</h1>
+<p>Puisque les corps en chute libre suivent le principe physique d'un mouvement accéléré, nous pouvons utiliser les formules qui s'appliquent à un tel mouvement.</p>
+  <p>N'oublie pas, par convention, une direction vers le bas est négative et une direction vers le haut est positive.</p>
+  <p>Lorsque tu laisses tomber un objet depuis une certaine hauteur :</p>
+  <div class="figure">
+    
+    <div>
+      <p>Voici les caractéristiques d'un tel mouvement :</p><p></p><figure style="width: 35%; max-width: 100%;" data-size="35"><img src="https://714a269b-bd57-43ee-b0c8-47e99192ed88.frame.claudeusercontent.com/_blob/ed553f52e52d6cce2eb972fc8a014fcf" alt=""><details class="credit"><summary>Crédit</summary><p>Illustration créée par Claude (IA), Anthropic.</p></details></figure><p></p>
+      <ul>
+        <li>L'accélération gravitationnelle est toujours constante et égale à <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span> = −9,81 m/s².</li>
+        <li>La vitesse augmente négativement (vers le bas).</li>
+        <li>La distance parcourue est négative (vers le bas).</li>
+        <li>Nous pouvons utiliser les formules d'un mouvement accéléré.</li>
+        <li>La seule force agissant sur la balle est la force gravitationnelle.</li>
+      </ul>
+    </div>
+  </div><figure></figure><p></p>
+</section>
+<section id="page11" data-title="Pratique autonome" hidden>
+<h1 tabindex="-1">Pratique autonome</h1>
+<div class="exos">
+    <h2 class="level">Niveau facile</h2>
+    <div class="exo">
+      <h3 class="exo-title">Problème 1</h3><p>Lors d'une randonnée dans les badlands près de Drumheller, Naya laisse tomber un caillou du haut d'une falaise. Le caillou atteint le sol 2,5 s plus tard. Quelle est la vitesse du caillou juste avant de toucher le sol?</p>
+      
+      <div id="sol-a1" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="t = 2{,}5\ \text{s}" class="math">\(t = 2{,}5\ \text{s}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></p>
+        <div class="steps"><p>On isole <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span> dans <span data-tex="\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}" class="math">\(\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}\)</span> : <span data-tex="\vec{v}_\text{f} = \vec{v}_\text{i} + \vec{a}\,\Delta t" class="math">\(\vec{v}_\text{f} = \vec{v}_\text{i} + \vec{a}\,\Delta t\)</span>.</p><p><span data-display="1" data-tex="\vec{v}_\text{f} = 0 + (-9{,}81)(2{,}5)" class="math">\[\vec{v}_\text{f} = 0 + (-9{,}81)(2{,}5)\]</span></p><p><span data-display="1" data-tex="\vec{v}_\text{f} = -25\ \text{m/s}" class="math">\[\vec{v}_\text{f} = -25\ \text{m/s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -25\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -25\ \text{m/s}\)</span>, soit environ 25 m/s vers le bas.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 2</h3><p>Debout sur un pont de 5,2 m de hauteur, tu laisses tomber un objet. Quelle est la vitesse de l'objet juste avant l'impact avec la surface de l'eau?</p>
+      
+      <div id="sol-a2" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -5{,}2\ \text{m}" class="math">\(\vec{d} = -5{,}2\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></p>
+        <div class="steps"><p>On n’a pas le temps, on utilise <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p><span data-display="1" data-tex="v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-5{,}2) = 102\ \text{m}^2/\text{s}^2" class="math">\[v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-5{,}2) = 102\ \text{m}^2/\text{s}^2\]</span></p><p><span data-display="1" data-tex="v_\text{f} = \sqrt{102} = 10\ \text{m/s}" class="math">\[v_\text{f} = \sqrt{102} = 10\ \text{m/s}\]</span></p><p>L’objet descend : la vitesse est négative.</p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -10\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -10\ \text{m/s}\)</span></p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 3</h3>
+      <p>Dans le canyon Grotto, près de Canmore, une grimpeuse échappe un mousqueton du haut d'une paroi. Il part du repos et touche le sol à une vitesse de 21 m/s.</p>
+      <ol type="A" class="sub"><li>De quelle hauteur le mousqueton est-il tombé?</li><li>Combien de temps a duré la chute?</li></ol>
+    
+      
+      <div id="sol-a3" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{v}_\text{f} = -21\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -21\ \text{m/s}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> A) <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span> ; B) <span data-tex="t" class="math">\(t\)</span></p>
+        <div class="steps"><p><strong>A)</strong> On utilise <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>, donc <span data-tex="d = \dfrac{v_\text{f}^{\,2} - v_\text{i}^{\,2}}{2a}" class="math">\(d = \dfrac{v_\text{f}^{\,2} - v_\text{i}^{\,2}}{2a}\)</span>.</p><p><span data-display="1" data-tex="\vec{d} = \frac{(-21)^2 - 0^2}{2(-9{,}81)} = \frac{441}{-19{,}62} = -22\ \text{m}" class="math">\[\vec{d} = \frac{(-21)^2 - 0^2}{2(-9{,}81)} = \frac{441}{-19{,}62} = -22\ \text{m}\]</span></p><p><strong>B)</strong> On utilise <span data-tex="\Delta t = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\vec{a}}" class="math">\(\Delta t = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\vec{a}}\)</span>.</p><p><span data-display="1" data-tex="\Delta t = \frac{-21 - 0}{-9{,}81} = 2{,}1\ \text{s}" class="math">\[\Delta t = \frac{-21 - 0}{-9{,}81} = 2{,}1\ \text{s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> A) Le mousqueton est tombé d’environ 22 m. B) La chute a duré 2,1 s.</p>
+      </div>
+    </div>
+
+    <h2 class="level">Niveau moyen</h2>
+    <div class="exo">
+      <h3 class="exo-title">Problème 4</h3><p>Le parc d'élévateurs à grains de Saint-Albert contient deux silos à grains magnifiquement restaurés et classés comme biens historiques provinciaux (Brackman-Ker, construit en 1906, et Alberta Wheat Pool, construit en 1929). Si un grain de blé tombe du haut de l'élévateur à grains Alberta Wheat Pool et met environ 2,3 s à toucher le sol, quelle est la hauteur, en mètres, de la structure?</p>
+      
+      <div id="sol-a4" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="t = 2{,}3\ \text{s}" class="math">\(t = 2{,}3\ \text{s}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span></p>
+        <div class="steps"><p>On utilise <span data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span>.</p><p><span data-display="1" data-tex="\vec{d} = 0 + \tfrac{1}{2}(-9{,}81)(2{,}3)^2" class="math">\[\vec{d} = 0 + \tfrac{1}{2}(-9{,}81)(2{,}3)^2\]</span></p><p><span data-display="1" data-tex="\vec{d} = -26\ \text{m}" class="math">\[\vec{d} = -26\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> L’élévateur à grains mesure environ 26 m.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 5</h3><p>Tu es debout sur la plateforme d'une structure de jeu. Tu laisses tomber un ballon rempli d'eau sur l'un de tes amis qui passe sous toi. Combien de temps prend le ballon pour tomber si tu te trouves à une hauteur de 1,8 m de ton ami?</p>
+      
+      <div id="sol-a5" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -1{,}8\ \text{m}" class="math">\(\vec{d} = -1{,}8\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="t" class="math">\(t\)</span></p>
+        <div class="steps"><p>Comme <span data-tex="\vec{v}_\text{i} = 0" class="math">\(\vec{v}_\text{i} = 0\)</span>, la formule <span data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span> devient <span data-tex="\vec{d} = \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \tfrac{1}{2}\vec{a}t^2\)</span>, donc <span data-tex="t = \sqrt{\dfrac{2\vec{d}}{\vec{a}}}" class="math">\(t = \sqrt{\dfrac{2\vec{d}}{\vec{a}}}\)</span>.</p><p><span data-display="1" data-tex="t = \sqrt{\frac{2(-1{,}8)}{-9{,}81}} = \sqrt{0{,}367}" class="math">\[t = \sqrt{\frac{2(-1{,}8)}{-9{,}81}} = \sqrt{0{,}367}\]</span></p><p><span data-display="1" data-tex="t = 0{,}61\ \text{s}" class="math">\[t = 0{,}61\ \text{s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Le ballon met 0,61 s à tomber.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 6</h3><p>Une balle est lâchée depuis le pont d'observation de la tour de Calgary à environ 160 m du sol. Quelle est la vitesse de la balle lorsqu'elle touche le sol, en km/h?</p>
+      
+      <div id="sol-a6" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -160\ \text{m}" class="math">\(\vec{d} = -160\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span> en km/h</p>
+        <div class="steps"><p>On utilise <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p><span data-display="1" data-tex="v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-160) = 3\,139\ \text{m}^2/\text{s}^2" class="math">\[v_\text{f}^{\,2} = 0^2 + 2(-9{,}81)(-160) = 3\,139\ \text{m}^2/\text{s}^2\]</span></p><p><span data-display="1" data-tex="v_\text{f} = \sqrt{3\,139} = 56{,}0\ \text{m/s}" class="math">\[v_\text{f} = \sqrt{3\,139} = 56{,}0\ \text{m/s}\]</span></p><p>Conversion : on multiplie par 3,6 (1 m/s = 3,6 km/h).</p><p><span data-display="1" data-tex="56{,}0\ \text{m/s} \times 3{,}6 = 202\ \text{km/h}" class="math">\[56{,}0\ \text{m/s} \times 3{,}6 = 202\ \text{km/h}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -202\ \text{km/h}" class="math">\(\vec{v}_\text{f} = -202\ \text{km/h}\)</span>, soit environ 202 km/h vers le bas.</p>
+      </div>
+    </div>
+
+    <h2 class="level">Niveau difficile</h2>
+    <div class="exo">
+      <h3 class="exo-title">Problème 7</h3><p>Une autre expérience qu'un astronaute a réalisée sur la Lune est de laisser tomber un objet d'une hauteur de 1,8 m et de mesurer le temps que celui-ci a pris pour atteindre le sol lunaire. Si l'astronaute a obtenu comme résultat 1,5 s, quelle est l'accélération gravitationnelle sur la Lune?</p>
+      
+      <div id="sol-a7" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -1{,}8\ \text{m}" class="math">\(\vec{d} = -1{,}8\ \text{m}\)</span>; <span data-tex="t = 1{,}5\ \text{s}" class="math">\(t = 1{,}5\ \text{s}\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{a}" class="math">\(\vec{a}\)</span> (accélération gravitationnelle sur la Lune)</p>
+        <div class="steps"><p>Comme <span data-tex="\vec{v}_\text{i} = 0" class="math">\(\vec{v}_\text{i} = 0\)</span>, on a <span data-tex="\vec{d} = \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \tfrac{1}{2}\vec{a}t^2\)</span>, donc <span data-tex="\vec{a} = \dfrac{2\vec{d}}{t^2}" class="math">\(\vec{a} = \dfrac{2\vec{d}}{t^2}\)</span>.</p><p><span data-display="1" data-tex="\vec{a} = \frac{2(-1{,}8)}{(1{,}5)^2} = \frac{-3{,}6}{2{,}25}" class="math">\[\vec{a} = \frac{2(-1{,}8)}{(1{,}5)^2} = \frac{-3{,}6}{2{,}25}\]</span></p><p><span data-display="1" data-tex="\vec{a} = -1{,}6\ \text{m/s}^2" class="math">\[\vec{a} = -1{,}6\ \text{m/s}^2\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{g}_\text{Lune} = -1{,}6\ \text{m/s}^2" class="math">\(\vec{g}_\text{Lune} = -1{,}6\ \text{m/s}^2\)</span>, environ 6 fois plus petite que sur la Terre.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 8</h3><p>Deux élèves marchent sur le pont High Level Bridge d'Edmonton avec un caillou à la main afin de mesurer approximativement la hauteur de la structure. Lorsqu'ils arrivent environ au milieu du pont, l'un d'eux lance le caillou vers le bas à une vitesse de 15 m/s et l'autre élève mesure, à l'aide d'un chronomètre, le temps nécessaire au caillou pour atteindre l'eau de la rivière Saskatchewan. Quelle est la hauteur du pont High Level Bridge d'Edmonton?</p>
+      
+      <div id="sol-a8" class="solution">
+        <p class="sol-note">Note pour l’enseignant : l’énoncé ne donne pas le temps mesuré. Le calcul utilise 2,0 s comme exemple.</p><p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = -15\ \text{m/s}" class="math">\(\vec{v}_\text{i} = -15\ \text{m/s}\)</span> (lancé vers le bas); <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span>; <span data-tex="t" class="math">\(t\)</span> = temps mesuré au chronomètre</p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span> (hauteur du pont)</p>
+        <div class="steps"><p>On utilise <span data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span>.</p><p>Exemple avec <span data-tex="t = 2{,}0\ \text{s}" class="math">\(t = 2{,}0\ \text{s}\)</span> :</p><p><span data-display="1" data-tex="\vec{d} = (-15)(2{,}0) + \tfrac{1}{2}(-9{,}81)(2{,}0)^2 = -30 - 19{,}6" class="math">\[\vec{d} = (-15)(2{,}0) + \tfrac{1}{2}(-9{,}81)(2{,}0)^2 = -30 - 19{,}6\]</span></p><p><span data-display="1" data-tex="\vec{d} = -50\ \text{m}" class="math">\[\vec{d} = -50\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Avec un temps de 2,0 s, le pont mesure environ 50 m de haut.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 9</h3>
+      <p>Un élève veut estimer la hauteur d'un pont ferroviaire qui enjambe une coulée dans le sud de l'Alberta. Il lâche une pierre (sans vitesse initiale) depuis le pont. Une amie, en bas, filme la chute et constate que la pierre parcourt 40 m pendant la dernière seconde de sa chute.</p>
+      <ol type="a" class="sub"><li>Quelle est la durée totale de la chute?</li><li>Quelle est la hauteur du pont?</li></ol>
+    
+      
+      <div id="sol-a9" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{d} = -40\ \text{m}" class="math">\(\vec{d} = -40\ \text{m}\)</span> pendant la dernière seconde; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> a) <span data-tex="t" class="math">\(t\)</span> (durée totale) ; b) <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span> (hauteur du pont)</p>
+        <div class="steps"><p><strong>a)</strong> Position après un temps <span data-tex="t" class="math">\(t\)</span> : <span data-tex="\vec{d}(t) = \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d}(t) = \tfrac{1}{2}\vec{a}t^2\)</span>. Une seconde avant la fin : <span data-tex="\vec{d}(t-1) = \tfrac{1}{2}\vec{a}(t-1)^2" class="math">\(\vec{d}(t-1) = \tfrac{1}{2}\vec{a}(t-1)^2\)</span>.</p><p>La distance parcourue pendant la dernière seconde est la différence :</p><p><span data-display="1" data-tex="\tfrac{1}{2}\vec{a}\left[t^2 - (t-1)^2\right] = \tfrac{1}{2}\vec{a}(2t - 1) = -40" class="math">\[\tfrac{1}{2}\vec{a}\left[t^2 - (t-1)^2\right] = \tfrac{1}{2}\vec{a}(2t - 1) = -40\]</span></p><p><span data-display="1" data-tex="2t - 1 = \frac{2(-40)}{-9{,}81} = 8{,}15 \quad\Rightarrow\quad t = 4{,}58\ \text{s}" class="math">\[2t - 1 = \frac{2(-40)}{-9{,}81} = 8{,}15 \quad\Rightarrow\quad t = 4{,}58\ \text{s}\]</span></p><p><strong>b)</strong> On utilise <span data-tex="\vec{d} = \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \tfrac{1}{2}\vec{a}t^2\)</span> avec la durée totale.</p><p><span data-display="1" data-tex="\vec{d} = \tfrac{1}{2}(-9{,}81)(4{,}58)^2 = -103\ \text{m}" class="math">\[\vec{d} = \tfrac{1}{2}(-9{,}81)(4{,}58)^2 = -103\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> a) La chute dure environ 4,58 s. b) Le pont mesure environ 103 m de haut.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title">Problème 10</h3><p>Un ouvrier travaille au sommet d'un vieux silo-élévateur à grain à Saint-Albert, à 30 m du sol. Il échappe un boulon, qui part du repos. 0,50 s plus tard, un collègue qui se trouve à une fenêtre plus bas sur le même mur échappe lui aussi un boulon (sans vitesse initiale). Les deux boulons touchent le sol en même temps.</p><p>À quelle hauteur se trouve la fenêtre du collègue?</p>
+      
+      <div id="sol-a10" class="solution">
+        <p><strong>Données :</strong> Hauteur de l’ouvrier : 30 m; <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span> pour les deux boulons; écart de 0,50 s; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> hauteur de la fenêtre du collègue</p>
+        <div class="steps"><p><strong>Boulon de l’ouvrier :</strong> <span data-tex="t_1 = \sqrt{\dfrac{2\vec{d}}{\vec{a}}} = \sqrt{\dfrac{2(-30)}{-9{,}81}} = 2{,}47\ \text{s}" class="math">\(t_1 = \sqrt{\dfrac{2\vec{d}}{\vec{a}}} = \sqrt{\dfrac{2(-30)}{-9{,}81}} = 2{,}47\ \text{s}\)</span></p><p>Le deuxième boulon part 0,50 s plus tard et arrive en même temps, donc il tombe pendant :</p><p><span data-display="1" data-tex="t_2 = 2{,}47 - 0{,}50 = 1{,}97\ \text{s}" class="math">\[t_2 = 2{,}47 - 0{,}50 = 1{,}97\ \text{s}\]</span></p><p><strong>Boulon du collègue :</strong> <span data-tex="\vec{d}_2 = \tfrac{1}{2}\vec{a}t_2^{\,2}" class="math">\(\vec{d}_2 = \tfrac{1}{2}\vec{a}t_2^{\,2}\)</span></p><p><span data-display="1" data-tex="\vec{d}_2 = \tfrac{1}{2}(-9{,}81)(1{,}97)^2 = -19\ \text{m}" class="math">\[\vec{d}_2 = \tfrac{1}{2}(-9{,}81)(1{,}97)^2 = -19\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> La fenêtre du collègue se trouve à environ 19 m du sol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="page12" data-title="Retour sur les objectifs" hidden>
+<h1 tabindex="-1">Retour sur les objectifs</h1>
+<p>Coche chaque objectif que tu te sens capable d’atteindre. Si tu hésites, fais les questions de révision associées, puis reviens cocher.</p>
+  <div class="progress"><div class="progress-track" role="progressbar" aria-label="Ma progression" aria-valuemin="0"><div class="progress-fill"></div></div><p class="progress-text"></p></div>
+  <ul class="checklist">
+    <li>
+      
+      <label for="obj1"><input type="checkbox"><span>Expliquer que le concept de l’analyse d’un objet en chute libre a évolué à mesure que de nouvelles preuves ont été découvertes et que la loi de la chute des corps a été testée. <span class="ras">(RAS – 20 – A 1.2 sts)</span></span></label>
+      <p class="practice">Pour t’exercer (page Révision) : <a href="#rev-q3">question 3</a> et <a href="#rev-q8">question 8</a></p>
+    </li>
+    <li>
+      
+      <label for="obj2"><input type="checkbox"><span>Expliquer qualitativement un objet en chute libre à partir de données fournies. <span class="ras">(RAS – 20 – A 1.3 c)</span></span></label>
+      <p class="practice">Pour t’exercer (page Révision) : <a href="#rev-q3">question 3</a>, <a href="#rev-q4">question 4</a> et <a href="#rev-q8">question 8</a></p>
+    </li>
+    <li>
+      
+      <label for="obj3"><input type="checkbox"><span>Expliquer quantitativement un objet en chute libre à partir de données fournies. <span class="ras">(RAS – 20 – A 1.3 c)</span></span></label>
+      <p class="practice">Pour t’exercer (page Révision) : <a href="#rev-q1">question 1</a>, <a href="#rev-q2">question 2</a>, <a href="#rev-q5">question 5</a>, <a href="#rev-q6">question 6</a>, <a href="#rev-q7">question 7</a>, <a href="#rev-q9">question 9</a> et <a href="#rev-q10">question 10</a></p>
+    </li>
+    <li>
+      
+      <label for="obj4"><input type="checkbox"><span>Expliquer que l’étude de la loi de la chute libre permet d’accroître la connaissance du monde naturel. <span class="ras">(RAS – 20 – A 1.1 sts)</span></span></label>
+      <p class="practice">Pour t’exercer (page Révision) : <a href="#rev-q4">question 4</a> et <a href="#rev-q8">question 8</a></p>
+    </li>
+  </ul>
+  <p><a href="#page13" class="go-btn">Faire les 10 questions de révision <span aria-hidden="true">→</span></a></p>
+  <p class="small">Tes coches sont gardées dans ce navigateur seulement.</p>
+</section>
+<section id="page13" data-title="Révision" hidden>
+<h1 tabindex="-1">Révision</h1>
+<p>Ces 10 questions couvrent toute la section. Essaie chaque question avant d’ouvrir la solution. Utilise <span data-tex="\vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{g} = -9{,}81\ \text{m/s}^2\)</span> sur la Terre, sauf indication contraire.</p>
+  <div class="exos">
+    <h2 class="level"><br></h2>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q1">Question 1</h3>
+      <p>À Red Deer, un glaçon se détache du toit d’une maison. Il touche le sol 1,22 s plus tard, à une vitesse de 12,0 m/s vers le bas. De quelle hauteur est-il tombé?</p>
+      
+      <div id="sol-n1" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; <span data-tex="\vec{v}_\text{f} = -12{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -12{,}0\ \text{m/s}\)</span>; <span data-tex="t = 1{,}22\ \text{s}" class="math">\(t = 1{,}22\ \text{s}\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span></p>
+        <div class="steps"><p>On connaît les deux vitesses et le temps : on utilise la formule de la vitesse moyenne <span data-tex="\vec{d} = \left(\dfrac{\vec{v}_\text{f} + \vec{v}_\text{i}}{2}\right)t" class="math">\(\vec{d} = \left(\dfrac{\vec{v}_\text{f} + \vec{v}_\text{i}}{2}\right)t\)</span>.</p><p><span data-display="1" data-tex="\vec{d} = \left(\frac{-12{,}0 + 0}{2}\right)(1{,}22)" class="math">\[\vec{d} = \left(\frac{-12{,}0 + 0}{2}\right)(1{,}22)\]</span></p><p><span data-display="1" data-tex="\vec{d} = -7{,}32\ \text{m}" class="math">\[\vec{d} = -7{,}32\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Le glaçon est tombé d’une hauteur de 7,32 m.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q2">Question 2</h3>
+      <p>Du haut d’une falaise de la vallée de la rivière Saskatchewan Sud, près de Medicine Hat, un élève lance un caillou verticalement vers le bas à 3,0 m/s. Quelle est la vitesse du caillou 1,5 s plus tard, avant qu’il touche le sol?</p>
+      
+      <div id="sol-m2" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = -3{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = -3{,}0\ \text{m/s}\)</span> (vers le bas); <span data-tex="t = 1{,}5\ \text{s}" class="math">\(t = 1{,}5\ \text{s}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></p>
+        <div class="steps"><p>Attention : la vitesse initiale est vers le bas, donc négative.</p><p>On isole <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span> dans <span data-tex="\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}" class="math">\(\vec{a} = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\Delta t}\)</span> : <span data-tex="\vec{v}_\text{f} = \vec{v}_\text{i} + \vec{a}\,\Delta t" class="math">\(\vec{v}_\text{f} = \vec{v}_\text{i} + \vec{a}\,\Delta t\)</span>.</p><p><span data-display="1" data-tex="\vec{v}_\text{f} = -3{,}0 + (-9{,}81)(1{,}5) = -3{,}0 - 14{,}7" class="math">\[\vec{v}_\text{f} = -3{,}0 + (-9{,}81)(1{,}5) = -3{,}0 - 14{,}7\]</span></p><p><span data-display="1" data-tex="\vec{v}_\text{f} = -17{,}7\ \text{m/s}" class="math">\[\vec{v}_\text{f} = -17{,}7\ \text{m/s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -17{,}7\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -17{,}7\ \text{m/s}\)</span>, soit 17,7 m/s vers le bas.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q3">Question 3</h3>
+      <p>Au Rogers Place, à Edmonton, une rondelle de hockey de 170 g lâchée du haut des gradins met 1,75 s pour toucher la glace. On lâche ensuite, de la même hauteur, une boule de quilles de 7,0 kg, environ 40 fois plus lourde. On néglige la résistance de l’air.</p><ol type="a" class="sub"><li>Selon Aristote, combien de temps mettrait la boule de quilles?</li><li>Selon Galilée, combien de temps mettrait-elle?</li><li>Quelle expérience a confirmé l’idée de Galilée?</li></ol>
+      
+      <div id="sol-n3" class="solution">
+        <div class="steps"><p><strong>a)</strong> Selon Aristote, un objet 40 fois plus lourd tombe 40 fois plus vite : <span data-tex="t = \dfrac{1{,}75\ \text{s}}{40} = 0{,}044\ \text{s}" class="math">\(t = \dfrac{1{,}75\ \text{s}}{40} = 0{,}044\ \text{s}\)</span>.</p><p><strong>b)</strong> Selon Galilée, sans résistance de l’air, tous les objets subissent la même accélération <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span>, peu importe leur masse. La boule met donc aussi 1,75 s.</p><p><strong>c)</strong> En 1971, lors de la mission Apollo 15, l’astronaute David Scott a lâché un marteau et une plume sur la Lune, où il n’y a presque pas d’air. Les deux objets ont touché le sol en même temps.</p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> a) 0,044 s selon Aristote. b) 1,75 s selon Galilée. c) L’expérience du marteau et de la plume sur la Lune.</p>
+      </div>
+    </div>
+    <h2 class="level"><br></h2>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q4">Question 4</h3>
+      <p>Une parachutiste saute d’un avion au-dessus d’Innisfail. Après quelques secondes de chute, elle atteint sa vitesse ultime.</p><ol type="a" class="sub"><li>Explique pourquoi sa vitesse cesse d’augmenter.</li><li>Que se passe-t-il pour sa vitesse ultime lorsqu’elle ouvre son parachute? Explique.</li></ol>
+      
+      <div id="sol-n4" class="solution">
+        <div class="steps"><p><strong>a)</strong> Deux forces agissent sur elle : la force gravitationnelle (vers le bas) et la résistance de l’air (vers le haut).</p><p>Au début, la force gravitationnelle est plus grande : elle accélère. Plus elle va vite, plus la résistance de l’air augmente.</p><p>Quand les deux forces sont égales, elles s’équilibrent : son accélération devient nulle et sa vitesse reste constante. C’est la vitesse ultime.</p><p><strong>b)</strong> En ouvrant son parachute, elle augmente beaucoup sa surface de contact avec l’air. La résistance de l’air augmente, donc sa vitesse ultime diminue : elle ralentit jusqu’à une nouvelle vitesse ultime, plus petite et sécuritaire pour l’atterrissage.</p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> a) Les forces sont équilibrées, l’accélération est nulle. b) La vitesse ultime diminue, car la surface de contact avec l’air augmente.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q5">Question 5</h3>
+      <p>À Fort McMurray, un ouvrier se tient sur une plateforme à 18,0 m du sol. Il lance un sac d’outils verticalement vers le bas à 2,0 m/s à un collègue resté au sol. Combien de temps le sac met-il pour toucher le sol?</p>
+      
+      <div id="sol-m5" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = -2{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = -2{,}0\ \text{m/s}\)</span> (vers le bas); <span data-tex="\vec{d} = -18{,}0\ \text{m}" class="math">\(\vec{d} = -18{,}0\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="t" class="math">\(t\)</span></p>
+        <div class="steps"><p>On ne peut pas isoler <span data-tex="t" class="math">\(t\)</span> facilement dans <span data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span>, car <span data-tex="\vec{v}_\text{i}" class="math">\(\vec{v}_\text{i}\)</span> n’est pas nul. On procède en deux étapes.</p><p><strong>Étape 1 :</strong> on trouve la vitesse finale avec <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p><span data-display="1" data-tex="v_\text{f}^{\,2} = (-2{,}0)^2 + 2(-9{,}81)(-18{,}0) = 4{,}0 + 353 = 357\ \text{m}^2/\text{s}^2" class="math">\[v_\text{f}^{\,2} = (-2{,}0)^2 + 2(-9{,}81)(-18{,}0) = 4{,}0 + 353 = 357\ \text{m}^2/\text{s}^2\]</span></p><p><span data-display="1" data-tex="v_\text{f} = \sqrt{357} = 18{,}9\ \text{m/s} \quad\Rightarrow\quad \vec{v}_\text{f} = -18{,}9\ \text{m/s}" class="math">\[v_\text{f} = \sqrt{357} = 18{,}9\ \text{m/s} \quad\Rightarrow\quad \vec{v}_\text{f} = -18{,}9\ \text{m/s}\]</span></p><p><strong>Étape 2 :</strong> on trouve le temps avec <span data-tex="\Delta t = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\vec{a}}" class="math">\(\Delta t = \dfrac{\vec{v}_\text{f} - \vec{v}_\text{i}}{\vec{a}}\)</span>.</p><p><span data-display="1" data-tex="\Delta t = \frac{-18{,}9 - (-2{,}0)}{-9{,}81} = \frac{-16{,}9}{-9{,}81} = 1{,}72\ \text{s}" class="math">\[\Delta t = \frac{-18{,}9 - (-2{,}0)}{-9{,}81} = \frac{-16{,}9}{-9{,}81} = 1{,}72\ \text{s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Le sac touche le sol après 1,72 s.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q6">Question 6</h3>
+      <p>Au canyon Maligne, près de Jasper, une guide se tient sur une passerelle à 35,0 m au-dessus de l’eau. Elle lance un caillou verticalement vers le bas à 4,0 m/s. Quelle est la vitesse du caillou juste avant de toucher l’eau?</p>
+      
+      <div id="sol-r6" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = -4{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = -4{,}0\ \text{m/s}\)</span> (vers le bas); <span data-tex="\vec{d} = -35{,}0\ \text{m}" class="math">\(\vec{d} = -35{,}0\ \text{m}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> <span data-tex="\vec{v}_\text{f}" class="math">\(\vec{v}_\text{f}\)</span></p>
+        <div class="steps"><p>Attention : la vitesse initiale n’est pas nulle et elle est négative (vers le bas).</p><p>On utilise <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span>.</p><p><span data-display="1" data-tex="v_\text{f}^{\,2} = (-4{,}0)^2 + 2(-9{,}81)(-35{,}0) = 16 + 687 = 703\ \text{m}^2/\text{s}^2" class="math">\[v_\text{f}^{\,2} = (-4{,}0)^2 + 2(-9{,}81)(-35{,}0) = 16 + 687 = 703\ \text{m}^2/\text{s}^2\]</span></p><p><span data-display="1" data-tex="v_\text{f} = \sqrt{703} = 26{,}5\ \text{m/s}" class="math">\[v_\text{f} = \sqrt{703} = 26{,}5\ \text{m/s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> <span data-tex="\vec{v}_\text{f} = -26{,}5\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -26{,}5\ \text{m/s}\)</span>, soit 26,5 m/s vers le bas.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q7">Question 7</h3>
+      <p>Pendant le tournage d’un film près de Canmore, un sac de sable est lancé verticalement vers le bas du haut d’une falaise. Il touche le sol 1,50 s plus tard, à une vitesse de 25,0 m/s.</p><ol type="a" class="sub"><li>Quelle est la hauteur de la falaise?</li><li>À quelle vitesse le sac a-t-il été lancé?</li></ol>
+      
+      <div id="sol-n7" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{f} = -25{,}0\ \text{m/s}" class="math">\(\vec{v}_\text{f} = -25{,}0\ \text{m/s}\)</span>; <span data-tex="t = 1{,}50\ \text{s}" class="math">\(t = 1{,}50\ \text{s}\)</span>; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> a) <span data-tex="\vec{d}" class="math">\(\vec{d}\)</span> ; b) <span data-tex="\vec{v}_\text{i}" class="math">\(\vec{v}_\text{i}\)</span></p>
+        <div class="steps"><p><strong>a)</strong> On ne connaît pas la vitesse initiale : on utilise <span data-tex="\vec{d} = \vec{v}_\text{f}t - \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{f}t - \tfrac{1}{2}\vec{a}t^2\)</span>.</p><p><span data-display="1" data-tex="\vec{d} = (-25{,}0)(1{,}50) - \tfrac{1}{2}(-9{,}81)(1{,}50)^2 = -37{,}5 + 11{,}0" class="math">\[\vec{d} = (-25{,}0)(1{,}50) - \tfrac{1}{2}(-9{,}81)(1{,}50)^2 = -37{,}5 + 11{,}0\]</span></p><p><span data-display="1" data-tex="\vec{d} = -26{,}5\ \text{m}" class="math">\[\vec{d} = -26{,}5\ \text{m}\]</span></p><p><strong>b)</strong> On utilise <span data-tex="\vec{v}_\text{i} = \vec{v}_\text{f} - \vec{a}\,\Delta t" class="math">\(\vec{v}_\text{i} = \vec{v}_\text{f} - \vec{a}\,\Delta t\)</span>.</p><p><span data-display="1" data-tex="\vec{v}_\text{i} = -25{,}0 - (-9{,}81)(1{,}50) = -10{,}3\ \text{m/s}" class="math">\[\vec{v}_\text{i} = -25{,}0 - (-9{,}81)(1{,}50) = -10{,}3\ \text{m/s}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> a) La falaise mesure 26,5 m. b) Le sac a été lancé à 10,3 m/s vers le bas.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q8">Question 8</h3>
+      <p>Dans son école à Grande Prairie, une élève filme une balle lâchée sans vitesse initiale. Elle note la position de la balle toutes les 0,10 s.</p>
+      <div aria-label="Positions de la balle" role="region" class="table-wrap table-scroll"><table>
+        <caption>Position de la balle selon le temps</caption>
+        <thead><tr><th scope="col">Temps (s)</th><th scope="col">Position (m)</th></tr></thead>
+        <tbody><tr><th scope="row">0</th><td>0</td></tr><tr><th scope="row">0,10</th><td>−0,049</td></tr><tr><th scope="row">0,20</th><td>−0,196</td></tr><tr><th scope="row">0,30</th><td>−0,441</td></tr><tr><th scope="row">0,40</th><td>−0,785</td></tr></tbody>
+      </table></div>
+      <p>Comme Galilée avec son plan incliné, analyse ces résultats.</p><ol type="a" class="sub"><li>Montre que la distance parcourue augmente comme le carré du temps.</li><li>Calcule l’accélération gravitationnelle.</li></ol>
+      
+      <div id="sol-n8" class="solution">
+        <p><strong>Données :</strong> positions à 0,10 s, 0,20 s, 0,30 s et 0,40 s; <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span></p>
+        <p><strong>Inconnue :</strong> a) relation entre <span data-tex="d" class="math">\(d\)</span> et <span data-tex="t" class="math">\(t\)</span> ; b) <span data-tex="\vec{g}" class="math">\(\vec{g}\)</span></p>
+        <div class="steps"><p><strong>a)</strong> Quand le temps double (0,10 s → 0,20 s), la distance est multipliée par <span data-tex="\dfrac{0{,}196}{0{,}049} = 4" class="math">\(\dfrac{0{,}196}{0{,}049} = 4\)</span>.</p><p>Quand le temps triple (0,10 s → 0,30 s), la distance est multipliée par <span data-tex="\dfrac{0{,}441}{0{,}049} = 9" class="math">\(\dfrac{0{,}441}{0{,}049} = 9\)</span>.</p><p>La distance augmente comme le carré du temps, exactement comme Galilée l’avait remarqué.</p><p><strong>b)</strong> Comme <span data-tex="\vec{v}_\text{i} = 0" class="math">\(\vec{v}_\text{i} = 0\)</span>, on a <span data-tex="\vec{d} = \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \tfrac{1}{2}\vec{a}t^2\)</span>, donc <span data-tex="\vec{a} = \dfrac{2\vec{d}}{t^2}" class="math">\(\vec{a} = \dfrac{2\vec{d}}{t^2}\)</span>. Avec la dernière mesure :</p><p><span data-display="1" data-tex="\vec{a} = \frac{2(-0{,}785)}{(0{,}40)^2} = -9{,}81\ \text{m/s}^2" class="math">\[\vec{a} = \frac{2(-0{,}785)}{(0{,}40)^2} = -9{,}81\ \text{m/s}^2\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> a) La distance est proportionnelle au carré du temps. b) <span data-tex="\vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{g} = -9{,}81\ \text{m/s}^2\)</span>.</p>
+      </div>
+    </div>
+    <h2 class="level"><br></h2>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q9">Question 9</h3>
+      <p>Au centre-ville de Calgary, un pot de fleurs tombe du rebord d’un balcon, sans vitesse initiale. Une personne, à la fenêtre d’un étage plus bas, le voit passer devant sa fenêtre de 1,50 m de hauteur en 0,200 s. De quelle hauteur au-dessus du haut de la fenêtre le pot est-il tombé?</p>
+      
+      <div id="sol-m9" class="solution">
+        <p><strong>Données :</strong> hauteur de la fenêtre : <span data-tex="\vec{d} = -1{,}50\ \text{m}" class="math">\(\vec{d} = -1{,}50\ \text{m}\)</span>, parcourue en <span data-tex="t = 0{,}200\ \text{s}" class="math">\(t = 0{,}200\ \text{s}\)</span>; le pot part du repos; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> hauteur <span data-tex="h" class="math">\(h\)</span> entre le balcon et le haut de la fenêtre</p>
+        <div class="steps"><p><strong>Étape 1 :</strong> on trouve la vitesse du pot quand il arrive en haut de la fenêtre. Pour le passage devant la fenêtre, on utilise <span data-tex="\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2" class="math">\(\vec{d} = \vec{v}_\text{i}t + \tfrac{1}{2}\vec{a}t^2\)</span> et on isole <span data-tex="\vec{v}_\text{i}" class="math">\(\vec{v}_\text{i}\)</span>.</p><p><span data-display="1" data-tex="-1{,}50 = \vec{v}_\text{i}(0{,}200) + \tfrac{1}{2}(-9{,}81)(0{,}200)^2 = 0{,}200\,\vec{v}_\text{i} - 0{,}196" class="math">\[-1{,}50 = \vec{v}_\text{i}(0{,}200) + \tfrac{1}{2}(-9{,}81)(0{,}200)^2 = 0{,}200\,\vec{v}_\text{i} - 0{,}196\]</span></p><p><span data-display="1" data-tex="\vec{v}_\text{i} = \frac{-1{,}50 + 0{,}196}{0{,}200} = -6{,}52\ \text{m/s}" class="math">\[\vec{v}_\text{i} = \frac{-1{,}50 + 0{,}196}{0{,}200} = -6{,}52\ \text{m/s}\]</span></p><p><strong>Étape 2 :</strong> le pot est parti du repos et a atteint 6,52 m/s vers le bas en haut de la fenêtre. On utilise <span data-tex="v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad" class="math">\(v_\text{f}^{\,2} = v_\text{i}^{\,2} + 2ad\)</span> entre le balcon et le haut de la fenêtre.</p><p><span data-display="1" data-tex="(-6{,}52)^2 = 0^2 + 2(-9{,}81)\,\vec{d} \quad\Rightarrow\quad \vec{d} = \frac{42{,}5}{-19{,}62} = -2{,}17\ \text{m}" class="math">\[(-6{,}52)^2 = 0^2 + 2(-9{,}81)\,\vec{d} \quad\Rightarrow\quad \vec{d} = \frac{42{,}5}{-19{,}62} = -2{,}17\ \text{m}\]</span></p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Le pot est tombé de 2,17 m au-dessus du haut de la fenêtre.</p>
+      </div>
+    </div>
+    <div class="exo">
+      <h3 class="exo-title" id="rev-q10">Question 10</h3>
+      <p>Un spéléologue explore la grotte Rat’s Nest, près de Canmore. Il lâche une pierre dans un puits vertical et entend le bruit de l’impact 2,40 s plus tard. Le son voyage à vitesse constante, à 340 m/s. Quelle est la profondeur du puits?</p>
+      
+      <div id="sol-n10" class="solution">
+        <p><strong>Données :</strong> <span data-tex="\vec{v}_\text{i} = 0\ \text{m/s}" class="math">\(\vec{v}_\text{i} = 0\ \text{m/s}\)</span>; temps total (chute + retour du son) : 2,40 s; vitesse du son : 340 m/s; <span data-tex="\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2" class="math">\(\vec{a} = \vec{g} = -9{,}81\ \text{m/s}^2\)</span></p>
+        <p><strong>Inconnue :</strong> profondeur <span data-tex="h" class="math">\(h\)</span> du puits</p>
+        <div class="steps"><p>Le temps total a deux parties : la chute de la pierre <span data-tex="t_1" class="math">\(t_1\)</span> et la remontée du son <span data-tex="t_2" class="math">\(t_2\)</span>, avec <span data-tex="t_1 + t_2 = 2{,}40\ \text{s}" class="math">\(t_1 + t_2 = 2{,}40\ \text{s}\)</span>.</p><p>Chute (vi = 0) : <span data-tex="h = \tfrac{1}{2}(9{,}81)\,t_1^{\,2} = 4{,}905\,t_1^{\,2}" class="math">\(h = \tfrac{1}{2}(9{,}81)\,t_1^{\,2} = 4{,}905\,t_1^{\,2}\)</span>. Son (vitesse constante) : <span data-tex="t_2 = \dfrac{h}{340}" class="math">\(t_2 = \dfrac{h}{340}\)</span>.</p><p>On remplace dans le temps total :</p><p><span data-display="1" data-tex="t_1 + \frac{4{,}905\,t_1^{\,2}}{340} = 2{,}40 \quad\Rightarrow\quad 0{,}01443\,t_1^{\,2} + t_1 - 2{,}40 = 0" class="math">\[t_1 + \frac{4{,}905\,t_1^{\,2}}{340} = 2{,}40 \quad\Rightarrow\quad 0{,}01443\,t_1^{\,2} + t_1 - 2{,}40 = 0\]</span></p><p><span data-display="1" data-tex="t_1 = \frac{-1 + \sqrt{1 + 4(0{,}01443)(2{,}40)}}{2(0{,}01443)} = 2{,}32\ \text{s}" class="math">\[t_1 = \frac{-1 + \sqrt{1 + 4(0{,}01443)(2{,}40)}}{2(0{,}01443)} = 2{,}32\ \text{s}\]</span></p><p><span data-display="1" data-tex="h = 4{,}905\,(2{,}32)^2 = 26{,}5\ \text{m}" class="math">\[h = 4{,}905\,(2{,}32)^2 = 26{,}5\ \text{m}\]</span></p><p>Vérification : le son met <span data-tex="\dfrac{26{,}5}{340} = 0{,}078\ \text{s}" class="math">\(\dfrac{26{,}5}{340} = 0{,}078\ \text{s}\)</span>, et <span data-tex="2{,}32 + 0{,}08 = 2{,}40\ \text{s}" class="math">\(2{,}32 + 0{,}08 = 2{,}40\ \text{s}\)</span>.</p></div>
+        <p class="sol-answer"><strong>Réponse :</strong> Le puits mesure environ 26,5 m de profondeur.</p>
+      </div>
+    </div>
+  </div>
+  <p class="back-link"><a href="#page12">Retourner aux objectifs pour cocher ta progression</a></p>
+</section>
+
+<nav class="pager" id="pager" aria-label="Page précédente et suivante"></nav>
+</main>
+</div>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]},svg:{fontCache:"global"},options:{enableMenu:false}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<script>(function(){var sections=[].slice.call(document.querySelectorAll("main section"));var list=document.getElementById("navList"),pager=document.getElementById("pager"),nav=document.getElementById("nav"),toggle=document.getElementById("navToggle"),current=document.getElementById("navCurrent");var TITLE="La chute libre";
+sections.forEach(function(s){var li=document.createElement("li"),a=document.createElement("a");a.href="#"+s.id;a.textContent=s.dataset.title;a.addEventListener("click",function(e){e.preventDefault();show(s.id,true)});li.appendChild(a);list.appendChild(li)});var links=[].slice.call(list.querySelectorAll("a"));
+function show(id,scroll){var i=-1,target=null;sections.forEach(function(s,j){if(s.id===id)i=j});if(i<0&&id){var el=document.getElementById(id),sec=el&&el.closest("main section");if(sec){i=sections.indexOf(sec);target=el}}if(i<0)i=0;
+sections.forEach(function(s,j){s.hidden=j!==i});links.forEach(function(a){a.removeAttribute("aria-current")});links[i].setAttribute("aria-current","page");current.textContent=(i+1)+". "+sections[i].dataset.title;pager.innerHTML="";
+if(i>0)pager.appendChild(pl(sections[i-1],"prev","Page précédente : "));if(i<sections.length-1)pager.appendChild(pl(sections[i+1],"next","Page suivante : "));document.title=sections[i].dataset.title+" – "+TITLE;
+try{history.replaceState(null,"","#"+(target?target.id:sections[i].id))}catch(e){}nav.classList.add("collapsed");toggle.setAttribute("aria-expanded","false");
+if(target){target.scrollIntoView();if(!target.hasAttribute("tabindex"))target.setAttribute("tabindex","-1");target.focus({preventScroll:true})}else if(scroll){window.scrollTo(0,0);var h=sections[i].querySelector("h1");if(h)h.focus({preventScroll:true})}}
+function pl(s,cls,label){var a=document.createElement("a");a.href="#"+s.id;a.className=cls;a.innerHTML='<span class="sr-only">'+label+'</span>'+(cls==="prev"?'<span aria-hidden="true">← </span>':"");a.appendChild(document.createTextNode(s.dataset.title));if(cls==="next")a.insertAdjacentHTML("beforeend",'<span aria-hidden="true"> →</span>');a.addEventListener("click",function(e){e.preventDefault();show(s.id,true)});return a}
+toggle.addEventListener("click",function(){var open=nav.classList.toggle("collapsed")===false;toggle.setAttribute("aria-expanded",String(open))});
+document.getElementById("contenu").addEventListener("click",function(e){var a=e.target.closest('a[href^="#"]');if(!a||a.closest("#pager"))return;var id=a.getAttribute("href").slice(1);if(id&&document.getElementById(id)){e.preventDefault();show(id,true)}});
+window.addEventListener("hashchange",function(){show(location.hash.slice(1),true)});
+[].slice.call(document.querySelectorAll(".solution")).forEach(function(sol,i){sol.id=sol.id||"sol-"+i;sol.hidden=true;var b=document.createElement("button");b.type="button";b.className="sol-btn";b.setAttribute("aria-expanded","false");b.setAttribute("aria-controls",sol.id);b.innerHTML='<span>Voir la solution</span> <span aria-hidden="true">▸</span>';b.addEventListener("click",function(){var open=sol.hidden;sol.hidden=!open;b.setAttribute("aria-expanded",String(open));b.firstChild.textContent=open?"Cacher la solution":"Voir la solution";b.lastChild.textContent=open?"▾":"▸"});sol.parentNode.insertBefore(b,sol)});
+[].slice.call(document.querySelectorAll(".checklist")).forEach(function(cl,k){var sec=cl.closest("section");var boxes=[].slice.call(cl.querySelectorAll("input[type=checkbox]"));var fill=sec.querySelector(".progress-fill"),txt=sec.querySelector(".progress-text"),bar=sec.querySelector(".progress-track");var KEY="obj-"+TITLE+"-"+k;var st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+boxes.forEach(function(b,i){b.checked=!!st[i];b.addEventListener("change",function(){var s={};boxes.forEach(function(x,j){s[j]=x.checked});try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}upd()})});
+function upd(){var n=boxes.filter(function(b){return b.checked}).length,t=boxes.length||1,p=Math.round(n/t*100);var tx=n+(n>1?" objectifs":" objectif")+" sur "+boxes.length+(n>1?" atteints":" atteint");if(fill)fill.style.width=p+"%";if(bar){bar.setAttribute("aria-valuemax",String(boxes.length));bar.setAttribute("aria-valuenow",String(n));bar.setAttribute("aria-valuetext",tx)}if(txt){txt.setAttribute("aria-live","polite");txt.textContent=tx+" ("+p+" %)"+(n===boxes.length&&n?". Bravo!":"")}}upd()});
+window.addEventListener("beforeprint",function(){[].slice.call(document.querySelectorAll("details.credit")).forEach(function(d){d.open=true})});
+document.getElementById("dlBtn").addEventListener("click",function(){document.getElementById("dlMsg").textContent="Dans la fenêtre d'impression, choisis « Enregistrer au format PDF ».";var t=document.title;document.title=TITLE;window.addEventListener("afterprint",function(){document.title=t},{once:true});window.print()});
+show(location.hash.slice(1)||"page1",false)})();</script>
+</body>
+</html>
