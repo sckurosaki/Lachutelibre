@@ -20,7 +20,7 @@
 .nav ol{list-style:none;margin:0 0 16px;padding:0;counter-reset:p;display:grid;gap:2px}.nav li{counter-increment:p}
 .nav ol a{display:grid;grid-template-columns:1.8em 1fr;color:var(--fg);text-decoration:none;font-size:.95rem;line-height:1.4;padding:5px 6px;border-radius:4px}
 .nav ol a::before{content:counter(p) ".";color:var(--muted)}.nav ol a:hover{background:var(--accent-soft)}.nav ol a[aria-current=page]{color:var(--accent);font-weight:700;background:var(--accent-soft)}
-.btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--btn);color:var(--btn-fg);border:0;border-radius:5px;padding:11px 14px;font:600 .95rem/1.3 var(--font-body);cursor:pointer;text-align:left}
+.btn-doc{margin-top:8px;text-decoration:none}.btn-doc:hover,.btn-doc:focus{text-decoration:none}.btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--btn);color:var(--btn-fg);border:0;border-radius:5px;padding:11px 14px;font:600 .95rem/1.3 var(--font-body);cursor:pointer;text-align:left}
 .dl-msg{font-size:.85rem;color:var(--muted);margin:8px 2px 0;min-height:1.2em}.nav-toggle{display:none}
 .page{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px 32px 32px;min-width:0}
 .page h1{font-family:var(--font-display);font-weight:600;color:var(--accent);font-size:1.75rem;line-height:1.3;margin:0 0 22px;padding-bottom:14px;border-bottom:3px solid var(--accent)}
@@ -66,6 +66,7 @@ main section,main section[hidden],.solution,.solution[hidden]{display:block!impo
 <p class="nav-title" id="navTitle">La chute libre</p>
 <ol id="navList"></ol>
 <button type="button" class="btn" id="dlBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Toute la leçon en PDF</button>
+<a class="btn btn-doc" id="docBtn" href="La%20chute%20libre.docx" download="La chute libre.docx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="m8 13 1.5 5 2.5-4 2.5 4 1.5-5"/></svg>Toute la leçon en Word</a>
 <p class="dl-msg" id="dlMsg" aria-live="polite"></p>
 </nav>
 <main class="page lesson-body" id="contenu" tabindex="-1">
