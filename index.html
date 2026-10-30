@@ -66,7 +66,7 @@ main section,main section[hidden],.solution,.solution[hidden]{display:block!impo
 <p class="nav-title" id="navTitle">La chute libre</p>
 <ol id="navList"></ol>
 <button type="button" class="btn" id="dlBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Toute la leçon en PDF</button>
-<a class="btn btn-doc" id="docBtn" href="La%20chute%20libre.docx" download="La chute libre.docx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="m8 13 1.5 5 2.5-4 2.5 4 1.5-5"/></svg>Toute la leçon en Word</a>
+<a class="btn btn-doc" id="docBtn" href="La-chute-libre.docx" download="La chute libre.docx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="m8 13 1.5 5 2.5-4 2.5 4 1.5-5"/></svg>Toute la leçon en Word</a>
 <p class="dl-msg" id="dlMsg" aria-live="polite"></p>
 </nav>
 <main class="page lesson-body" id="contenu" tabindex="-1">
@@ -599,5 +599,14 @@ box.innerHTML=svg+'<div><p><strong>▶ Vidéo : '+title.replace(/[<>&]/g,"")+'</
 [].slice.call(document.querySelectorAll("p.video")).forEach(function(p){var a=p.querySelector("a");if(!a)return;p.parentNode.insertBefore(qrBox(a.href,a.textContent.replace(/^\s*Vidéo\s*:\s*/,"").replace(/\(s’ouvre.*$/,"").trim()),p.nextSibling);p.classList.add("video-screen")});
 document.getElementById("dlBtn").addEventListener("click",function(){document.getElementById("dlMsg").textContent="Dans la fenêtre d'impression, choisis « Enregistrer au format PDF ».";var t=document.title;document.title=TITLE;window.addEventListener("afterprint",function(){document.title=t},{once:true});window.print()});
 show(location.hash.slice(1)||"page1",false)})();</script>
+<script>
+/* Bouton Word : télécharge le fichier en arrière-plan (fonctionne aussi quand le site est intégré ailleurs) */
+(function(){var a=document.getElementById("docBtn"),msg=document.getElementById("dlMsg");if(!a)return;
+function alts(u){var l=[u];var m=u.match(/^https:\/\/cdn\.jsdelivr\.net\/gh\/([^\/]+)\/([^@\/]+)@([^\/]+)\/(.+)$/);if(m)l.push("https://raw.githubusercontent.com/"+m[1]+"/"+m[2]+"/"+m[3]+"/"+m[4]);return l}
+function save(blob){var name=a.getAttribute("download")||"lecon.docx";if(window.navigator&&navigator.msSaveOrOpenBlob){navigator.msSaveOrOpenBlob(blob,name);return}var u=URL.createObjectURL(blob),x=document.createElement("a");x.href=u;x.download=name;document.body.appendChild(x);x.click();setTimeout(function(){URL.revokeObjectURL(u);x.remove()},4000)}
+a.addEventListener("click",function(e){if(location.protocol==="file:")return;e.preventDefault();var list=alts(a.href),i=0;if(msg)msg.textContent="Préparation du fichier Word…";
+(function next(){if(i>=list.length){if(msg)msg.textContent="Le téléchargement a été bloqué. Le fichier s’ouvre dans un nouvel onglet.";window.open(list[list.length-1],"_blank","noopener");return}var u=list[i++];
+fetch(u,{mode:"cors"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.blob()}).then(function(b){if(b.size<1000)throw new Error("vide");save(new Blob([b],{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"}));if(msg)msg.textContent="Fichier Word téléchargé."}).catch(next)})()})})();
+</script>
 </body>
 </html>
